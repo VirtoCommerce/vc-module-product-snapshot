@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+  <id>VirtoCommerce.ProductSnapshot</id>
+  <version>3.1000.0</version>
+  <version-tag></version-tag>
+
+  <platformVersion>3.1007.0</platformVersion>
+  <dependencies>
+    <dependency id="VirtoCommerce.Xapi" version="3.1003.0" />
+  </dependencies>
+
+  <title>VirtoCommerce ProductSnapshot</title>
+  <description>VirtoCommerce ProductSnapshot</description>
+
+  <authors>
+    <author>VirtoCommerce</author>
+  </authors>
+  <owners>
+    <owner>VirtoCommerce</owner>
+  </owners>
+
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-product-snapshot</projectUrl>
+  <iconUrl>Modules/$(VirtoCommerce.ProductSnapshot)/Content/logo.png</iconUrl>
+  <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+  <assemblyFile>VirtoCommerce.ProductSnapshot.Web.dll</assemblyFile>
+  <moduleType>VirtoCommerce.ProductSnapshot.Web.Module, VirtoCommerce.ProductSnapshot.Web</moduleType>
+
+  <releaseNotes>First version.</releaseNotes>
+  <copyright>Copyright © 2026 VirtoCommerce. All rights reserved</copyright>
+  <tags>extension module</tags>
+  <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
+</module>

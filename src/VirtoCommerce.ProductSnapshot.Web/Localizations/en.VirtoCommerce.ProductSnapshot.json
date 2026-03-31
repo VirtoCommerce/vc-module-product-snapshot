@@ -1,0 +1,24 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "hello-world": {
+        "title": "Hello world blade"
+      }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Open ProductSnapshot menu",
+    "product-snapshot:create": "Create ProductSnapshot related data",
+    "product-snapshot:read": "View ProductSnapshot related data",
+    "product-snapshot:update": "Update ProductSnapshot related data",
+    "product-snapshot:delete": "Delete ProductSnapshot related data"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "ProductSnapshot Enabled",
+        "description": "ProductSnapshot Enabled setting"
+      }
+    }
+  }
+}
