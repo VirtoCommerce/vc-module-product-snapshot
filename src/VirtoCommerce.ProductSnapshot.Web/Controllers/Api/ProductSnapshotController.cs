@@ -1,7 +1,8 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VirtoCommerce.CatalogModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.ProductSnapshot.Core.Models;
 using VirtoCommerce.ProductSnapshot.Core.Services;
@@ -13,7 +14,8 @@ namespace VirtoCommerce.ProductSnapshot.Web.Controllers.Api;
 [Route("api/product-snapshots")]
 public class ProductSnapshotController(
     IOrderProductSnapshotService crudService,
-    IOrderProductSnapshotSearchService searchService)
+    IOrderProductSnapshotSearchService searchService,
+    ICatalogProductSnapshotProvider snapshotProvider)
     : Controller
 {
     [HttpPost("search")]
@@ -24,36 +26,22 @@ public class ProductSnapshotController(
         return Ok(result);
     }
 
-    [HttpPost]
-    [Authorize(Permissions.Create)]
-    public Task<ActionResult<Core.Models.OrderProductSnapshot>> Create([FromBody] Core.Models.OrderProductSnapshot model)
-    {
-        model.Id = null;
-        return Update(model);
-    }
-
-    [HttpPut]
-    [Authorize(Permissions.Update)]
-    public async Task<ActionResult<Core.Models.OrderProductSnapshot>> Update([FromBody] Core.Models.OrderProductSnapshot model)
-    {
-        await crudService.SaveChangesAsync([model]);
-        return Ok(model);
-    }
-
     [HttpGet("{id}")]
     [Authorize(Permissions.Read)]
-    public async Task<ActionResult<Core.Models.OrderProductSnapshot>> Get([FromRoute] string id, [FromQuery] string responseGroup = null)
+    public async Task<ActionResult<OrderProductSnapshot>> GetById([FromRoute] string id, [FromQuery] string responseGroup = null)
     {
         var model = await crudService.GetNoCloneAsync(id, responseGroup);
         return Ok(model);
     }
 
-    [HttpDelete]
-    [Authorize(Permissions.Delete)]
-    [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> Delete([FromQuery] string[] ids)
+    [HttpGet("order/{orderId}/product/{productId}")]
+    [Authorize(Permissions.Read)]
+    public async Task<ActionResult<CatalogProduct>> GetByOrderAndProductId([FromRoute] string orderId, [FromRoute] string productId)
     {
-        await crudService.DeleteAsync(ids);
-        return NoContent();
+        var productSnapshots = await snapshotProvider.GetOrderProductSnapshotsAsync(orderId);
+
+        var productSnapshot = productSnapshots.FirstOrDefault(x => x.Id == productId);
+
+        return Ok(productSnapshot);
     }
 }

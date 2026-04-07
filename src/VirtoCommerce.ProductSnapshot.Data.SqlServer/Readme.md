@@ -5,7 +5,7 @@ Add-Migration Initial -Context VirtoCommerce.ProductSnapshot.Data.Repositories.P
 
 ### Entity Framework Core Commands
 ```
-dotnet tool install --global dotnet-ef --version 10.0.1
+dotnet tool install --global dotnet-ef --version 10.0.5
 ```
 
 **Generate Migrations**
