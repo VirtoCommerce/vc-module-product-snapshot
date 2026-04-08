@@ -62,7 +62,7 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
     {
         var searchCriteria = new OrderProductSnapshotSearchCriteria
         {
-            ObjectIds = [orderId],
+            OrderIds = [orderId],
         };
 
         var snapshots = await _snapshotSearchService.SearchAllNoCloneAsync(searchCriteria);

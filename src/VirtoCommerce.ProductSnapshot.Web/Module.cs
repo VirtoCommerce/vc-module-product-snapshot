@@ -1,4 +1,6 @@
 using System;
+using GraphQL;
+using GraphQL.MicrosoftDI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,11 @@ using VirtoCommerce.ProductSnapshot.Data.PostgreSql;
 using VirtoCommerce.ProductSnapshot.Data.Repositories;
 using VirtoCommerce.ProductSnapshot.Data.Services;
 using VirtoCommerce.ProductSnapshot.Data.SqlServer;
+using VirtoCommerce.ProductSnapshot.ExperienceApi;
+using VirtoCommerce.ProductSnapshot.ExperienceApi.Middlewares;
+using VirtoCommerce.Xapi.Core.Extensions;
+using VirtoCommerce.Xapi.Core.Pipelines;
+using VirtoCommerce.XOrder.Core.Models;
 
 namespace VirtoCommerce.ProductSnapshot.Web;
 
@@ -48,6 +55,17 @@ public class Module : IModule, IHasConfiguration
             }
         });
 
+        // Xapi and Pipelines
+        var graphQlBuilder = new GraphQLBuilder(serviceCollection, builder =>
+        {
+            builder.AddSchema(serviceCollection, typeof(XapiAssemblyMarker));
+        });
+
+        serviceCollection.AddPipeline<ExternalOrderProducts>(builder =>
+        {
+            builder.AddMiddleware(typeof(LoadorderProductSnapshotMiddleware));
+        });
+
         // Register services
         serviceCollection.AddTransient<IProductSnapshotRepository, ProductSnapshotRepository>();
         serviceCollection.AddSingleton<Func<IProductSnapshotRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<IProductSnapshotRepository>());
@@ -57,7 +75,6 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddTransient<ICatalogProductSnapshotProvider, VirtoCatalogSnapshotProvider>();
         serviceCollection.AddTransient<CreateOrderProductSnapshotEventHandler>();
-
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
