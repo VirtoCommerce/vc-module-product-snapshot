@@ -15,7 +15,11 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
 {
     protected virtual int BatchSize => 20;
 
-    protected virtual string ProductSnapshotResponseGroup { get; } = ItemResponseGroup.Full.ToString();
+    protected virtual string ProductSnapshotResponseGroup { get; } =
+        (ItemResponseGroup.ItemInfo |
+        ItemResponseGroup.ItemAssets |
+        ItemResponseGroup.ItemProperties |
+        ItemResponseGroup.ItemEditorialReviews).ToString();
 
     private readonly IItemService _itemService;
     private readonly IOrderProductSnapshotService _snapshotService;

@@ -59,6 +59,7 @@ angular.module(moduleName, [])
                                 id: 'productSnapshotDetail',
                                 controller: 'VirtoCommerce.ProductSnapshot.ProductSnapshotDetails',
                                 template: 'Modules/$(VirtoCommerce.ProductSnapshot)/Scripts/blades/product-snapshot-details.html',
+                                hideToolbar: false,
                                 title: item.name,
                                 snapshot: snapshot,
                                 snapshotId: snapshot.id,

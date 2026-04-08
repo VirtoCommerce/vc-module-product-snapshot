@@ -1,161 +1,246 @@
-<div class="blade-content __medium-wide">
+<div class="blade-content __xxlarge-wide">
   <div class="blade-inner">
     <div class="inner-block">
-      <form class="form" name="detailForm">
-        <va-metaform registered-inputs="blade.metaFields"
-                     blade="blade"
-                     column-count="6"
-                     ng-if="blade.currentEntity">
-        </va-metaform>
 
-        <va-metaform registered-inputs="blade.metaFields1"
-                     blade="blade"
-                     column-count="6"
-                     ng-if="blade.currentEntity"
-                     class="blade-gray-box">
-        </va-metaform>
+      <div class="vc-snap">
 
-        <va-metaform registered-inputs="blade.metaFields2"
-                     blade="blade"
-                     column-count="6"
-                     ng-if="blade.currentEntity">
-        </va-metaform>
-      </form>
+        <!-- Top bar -->
+        <div class="vc-snap__topbar">
+          <div class="vc-snap__topbar-left">
+            <span class="vc-snap__snapshot-label">Product snapshot</span>
+            <span class="vc-snap__product-title">{{ blade.snapshot.name }}</span>
+            <span class="vc-snap__product-sub">Code: {{ blade.snapshot.code }} &nbsp;·&nbsp; ID: {{ blade.snapshot.id }}</span>
+          </div>
+          <div class="vc-snap__topbar-right">
+            <div class="vc-snap__timestamp">Created {{ blade.snapshot.createdDate | date:'d MMM yyyy' }} by {{ blade.snapshot.createdBy }}</div>
+            <div class="vc-snap__timestamp">Modified {{ blade.snapshot.modifiedDate | date:'d MMM yyyy' }} by {{ blade.snapshot.modifiedBy }}</div>
+          </div>
+        </div>
+
+        <!-- Meta pills -->
+        <div class="vc-snap__meta-row">
+          <span class="vc-snap__pill" ng-class="blade.snapshot.isActive ? 'vc-snap__pill--active' : 'vc-snap__pill--danger'">
+            {{ blade.snapshot.isActive ? 'Active' : 'Inactive' }}
+          </span>
+          <span class="vc-snap__pill vc-snap__pill--active" ng-if="blade.snapshot.isBuyable">Buyable</span>
+          <span class="vc-snap__pill vc-snap__pill--info" ng-if="blade.snapshot.trackInventory">Track inventory</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.productType">{{ blade.snapshot.productType }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="!blade.snapshot.isInherited">Not inherited</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.parentCategoryIsActive">Parent category active</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.packSize != null">Pack: {{ blade.snapshot.packSize }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.minQuantity != null">Min qty: {{ blade.snapshot.minQuantity }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.maxQuantity != null">
+            Max qty: {{ blade.snapshot.maxQuantity }}{{ blade.snapshot.maxQuantity === 0 ? ' (unlimited)' : '' }}
+          </span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.priority != null">Priority: {{ blade.snapshot.priority }}</span>
+        </div>
+
+        <!-- Identity / Dimensions / Dates -->
+        <div class="vc-snap__grid3">
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">Identity</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Product type</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.productType">{{ blade.snapshot.productType }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.productType">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">SEO object type</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.seoObjectType">{{ blade.snapshot.seoObjectType }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.seoObjectType">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Catalog ID</div>
+                <span class="vc-snap__stat-val vc-snap__stat-val--mono" ng-if="blade.snapshot.catalogId">{{ blade.snapshot.catalogId | truncate:16 }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.catalogId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Category ID</div>
+                <span class="vc-snap__stat-val vc-snap__stat-val--mono" ng-if="blade.snapshot.categoryId">{{ blade.snapshot.categoryId | truncate:16 }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.categoryId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Outer ID</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.outerId">{{ blade.snapshot.outerId }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.outerId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Main product ID</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.mainProductId">{{ blade.snapshot.mainProductId }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.mainProductId">null</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">Dimensions &amp; shipping</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat" ng-repeat="field in blade.dimensionFields">
+                <div class="vc-snap__stat-label">{{ field.label }}</div>
+                <span class="vc-snap__stat-val" ng-if="field.value != null">{{ field.value }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="field.value == null">null</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">Dates</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Start date</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.startDate">{{ blade.snapshot.startDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.startDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">End date</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.endDate">{{ blade.snapshot.endDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.endDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Indexing date</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.indexingDate">{{ blade.snapshot.indexingDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.indexingDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Created</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.createdDate">{{ blade.snapshot.createdDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.createdDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Created by</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.createdBy">{{ blade.snapshot.createdBy }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.createdBy">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">Modified by</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.modifiedBy">{{ blade.snapshot.modifiedBy }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.modifiedBy">null</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Localized names -->
+        <div class="vc-snap__card">
+          <div class="vc-snap__card-header">Localized names</div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__localized-table">
+              <tr ng-if="blade.localizedNames.length === 0">
+                <td><span class="vc-snap__tag vc-snap__tag--null">No localized names</span></td>
+              </tr>
+              <tr ng-repeat="item in blade.localizedNames">
+                <td><span class="vc-snap__lang-badge">{{ item.lang }}</span></td>
+                <td>{{ item.value }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Other fields -->
+        <div class="vc-snap__card">
+          <div class="vc-snap__card-header">Other fields</div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__prop-table">
+              <tr ng-repeat="field in blade.otherFields">
+                <td class="vc-snap__prop-key">{{ field.label }}</td>
+                <td>
+                  <span class="vc-snap__tag" ng-if="field.value != null">{{ field.value }}</span>
+                  <span class="vc-snap__tag vc-snap__tag--null" ng-if="field.value == null">null</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Properties -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.properties.length">
+          <div class="vc-snap__card-header">
+            Properties
+            <span class="vc-snap__card-header-count">{{ blade.snapshot.properties.length }} entries</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__prop-table vc-snap__prop-table--full">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Value</th>
+                  <th>Type / flags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="prop in blade.snapshot.properties">
+                  <td class="vc-snap__prop-name">{{ prop.name }}</td>
+                  <td>
+                    <span ng-if="prop.values.length">
+                      <span class="vc-snap__tag" ng-class="{ 'vc-snap__tag--inherited': prop.isInherited }"
+                            ng-repeat="v in prop.values">{{ v.value }}</span>
+                    </span>
+                    <span class="vc-snap__tag vc-snap__tag--null" ng-if="!prop.values.length">not set</span>
+                  </td>
+                  <td>
+                    <div class="vc-snap__prop-flags">
+                      <span class="vc-snap__tag"
+                            ng-class="prop.type === 'Variation' ? 'vc-snap__tag--type-variation' : 'vc-snap__tag--type-product'">
+                        {{ prop.type }}
+                      </span>
+                      <span class="vc-snap__tag">{{ prop.valueType }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.required">required</span>
+                      <span class="vc-snap__flag" ng-if="prop.dictionary">dictionary</span>
+                      <span class="vc-snap__flag" ng-if="prop.multivalue">multivalue</span>
+                      <span class="vc-snap__flag" ng-if="prop.multilanguage">multilang</span>
+                      <span class="vc-snap__flag" ng-if="prop.isInherited">inherited</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Images -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.images.length">
+          <div class="vc-snap__card-header">
+            Images
+            <span class="vc-snap__card-header-count">{{ blade.snapshot.images.length }} files</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <div class="vc-snap__img-grid">
+              <div class="vc-snap__img-item" ng-repeat="img in blade.snapshot.images">
+                <div class="vc-snap__img-thumb-box">&#127911;</div>
+                <div>
+                  <div class="vc-snap__img-sort">#{{ img.sortOrder }}</div>
+                  <div class="vc-snap__img-meta">{{ img.name | truncateStart:60 }}</div>
+                  <div class="vc-snap__img-meta vc-snap__img-meta--mono">{{ img.id }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.reviews.length">
+          <div class="vc-snap__card-header">
+            Reviews
+            <span class="vc-snap__card-header-count">{{ blade.snapshot.reviews.length }} blocks</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <div class="vc-snap__review-block" ng-repeat="review in blade.snapshot.reviews">
+              <div class="vc-snap__review-meta">
+                <span class="vc-snap__review-type-badge">{{ review.reviewType }}</span>
+                <span class="vc-snap__lang-badge">{{ review.languageCode }}</span>
+                <span class="vc-snap__review-active" ng-if="!review.isInherited">Active</span>
+              </div>
+              <div class="vc-snap__review-preview">{{ review.content | sanitize | limitTo:300 }}</div>
+              <div class="vc-snap__review-id">{{ review.id }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="product-details-is-active-readonly.html">
-  <div class="form-input">
-    <label class="form-label __switch">
-      <input type="checkbox" ng-model="blade.currentEntity.isActive" disabled="disabled">
-      <span class="switch disabled"></span>
-    </label>
-  </div>
-
-  <div class="form-error" ng-if="!blade.currentEntity.parentCategoryIsActive">
-    <div class="vc-alert vc-alert--warning">
-      <svg class="vc-alert__icon">
-        <use href="/images/error.svg#icon"></use>
-      </svg>
-      <div class="vc-alert__text">{{ 'catalog.blades.category-detail.parent-disabled-alert' | translate }}</div>
-    </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="name-readonly.html">
-  <div class="form-input">
-    <textarea class="__xsmall"
-              cols="30"
-              rows="1"
-              ng-model="blade.item.name"
-              readonly="readonly"
-              disabled
-              placeholder="{{ 'catalog.blades.item-detail.placeholders.name' | translate }}">
-        </textarea>
-  </div>
-</script>
-
-<script type="text/ng-template" id="localizedName-readonly.html">
-  <div class="vc-catalog form-input __langs"
-       ng-repeat="language in blade.catalog.languages | limitTo: blade.showAllLanguages ? blade.catalog.languages.length : 2">
-    <label class="lang-code">{{language.languageCode}}</label>
-    <input ng-model="blade.currentEntity.localizedName.values[language.languageCode]"
-           type="text"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.name' | translate }}" />
-  </div>
-
-  <div ng-if="blade.catalog.languages.length > 2">
-    <a href="" ng-click="blade.showAllLanguages = !blade.showAllLanguages">
-      {{ (blade.showAllLanguages ? 'catalog.blades.item-detail.labels.show-less-languages' : 'catalog.blades.item-detail.labels.show-more-languages' ) | translate }}
-    </a>
-  </div>
-</script>
-
-<script type="text/ng-template" id="sku-readonly.html">
-  <div class="form-input">
-    <input class="form-control"
-           ng-model="blade.item.code"
-           name="code"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.sku' | translate }}" />
-  </div>
-</script>
-
-<script type="text/ng-template" id="gtin-readonly.html">
-  <div class="form-input">
-    <input class="form-control"
-           ng-model="blade.item.gtin"
-           name="gtin"
-           type="text"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.gtin' | translate }}" />
-  </div>
-</script>
-
-<script type="text/ng-template" id="mpn-readonly.html">
-  <div class="form-input">
-    <input class="form-control"
-           ng-model="blade.item.manufacturerPartNumber"
-           name="manufacturerPartNumber"
-           type="text"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.mpn' | translate }}" />
-  </div>
-</script>
-
-<script type="text/ng-template" id="startDate-readonly.html">
-  <div class="form-input __calendar">
-    <input ng-model="blade.item.startDate"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.start-date' | translate }}" />
-    <button class="btn" type="button" disabled="disabled">
-      <i class="btn-ico fa fa-calendar"></i>
-    </button>
-  </div>
-</script>
-
-<script type="text/ng-template" id="endDate-readonly.html">
-  <div class="form-input __calendar">
-    <input ng-model="blade.item.endDate"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.end-date' | translate }}" />
-    <button class="btn" type="button" disabled="disabled">
-      <i class="btn-ico fa fa-calendar"></i>
-    </button>
-  </div>
-</script>
-
-<script type="text/ng-template" id="downloadType-readonly.html">
-  <div class="form-input">
-    <input class="form-control"
-           ng-model="blade.item.downloadType"
-           readonly="readonly"
-           placeholder="{{ 'catalog.blades.item-detail.placeholders.download-type' | translate }}" />
-  </div>
-</script>
-
-<script type="text/ng-template" id="vendor-readonly.html">
-  <div class="form-group">
-    <label class="form-label">{{ 'catalog.blades.item-detail.labels.vendor' | translate }}</label>
-    <div class="form-input">
-      <input class="form-control"
-             ng-value="blade.item.vendor && blade.item.vendor.name ? blade.item.vendor.name : blade.item.vendor"
-             readonly="readonly"
-             placeholder="{{ 'catalog.blades.item-detail.placeholders.vendor' | translate }}" />
-    </div>
-  </div>
-</script>
-
-<script type="text/ng-template" id="taxType-readonly.html">
-  <div class="form-group">
-    <label class="form-label">{{ 'catalog.blades.item-detail.labels.tax-type' | translate }}</label>
-    <div class="form-input">
-      <input class="form-control"
-             ng-model="blade.item.taxType"
-             readonly="readonly"
-             placeholder="{{ 'catalog.blades.item-detail.placeholders.tax-type' | translate }}" />
-    </div>
-  </div>
-</script>
