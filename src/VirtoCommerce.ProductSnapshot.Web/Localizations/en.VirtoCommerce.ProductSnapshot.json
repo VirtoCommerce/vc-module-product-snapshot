@@ -1,23 +1,88 @@
 {
   "ProductSnapshot": {
     "blades": {
-      "hello-world": {
-        "title": "Hello world blade"
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Identity",
+          "dimensions": "Dimensions & shipping",
+          "dates": "Dates",
+          "localized-names": "Localized names",
+          "other-fields": "Other fields",
+          "properties": "Properties",
+          "images": "Images",
+          "reviews": "Reviews"
+        },
+        "labels": {
+          "product-snapshot": "Product snapshot",
+          "code": "Code",
+          "id": "ID",
+          "active": "Active",
+          "inactive": "Inactive",
+          "buyable": "Buyable",
+          "track-inventory": "Track inventory",
+          "not-inherited": "Not inherited",
+          "parent-category-active": "Parent category active",
+          "pack": "Pack",
+          "min-qty": "Min qty",
+          "max-qty": "Max qty",
+          "unlimited": "unlimited",
+          "priority": "Priority",
+          "product-type": "Product type",
+          "seo-object-type": "SEO object type",
+          "catalog-id": "Catalog ID",
+          "category-id": "Category ID",
+          "outer-id": "Outer ID",
+          "main-product-id": "Main product ID",
+          "weight": "Weight",
+          "weight-unit": "Weight unit",
+          "height": "Height",
+          "width": "Width",
+          "length": "Length",
+          "measure-unit": "Measure unit",
+          "start-date": "Start date",
+          "end-date": "End date",
+          "indexing-date": "Indexing date",
+          "created-by": "Created by",
+          "modified-by": "Modified by",
+          "created-at": "Created at",
+          "modified-at": "Modified at",
+          "no-localized-names": "No localized names",
+          "vendor": "Vendor",
+          "tax-type": "Tax type",
+          "shipping-type": "Shipping type",
+          "package-type": "Package type",
+          "gtin": "GTIN",
+          "manufacturer-part": "Manufacturer part #",
+          "enable-review": "Enable review",
+          "has-user-agreement": "Has user agreement",
+          "prop-name": "Name",
+          "prop-value": "Value",
+          "prop-type-flags": "Type / flags",
+          "not-set": "not set",
+          "flag-required": "required",
+          "flag-dictionary": "dictionary",
+          "flag-multivalue": "multivalue",
+          "flag-multilang": "multilang",
+          "flag-inherited": "inherited",
+          "entries": "{{ propertyCount }} entries",
+          "files": "{{ fileCount }} files",
+          "blocks": "{{ blockCount }} blocks"
+        }
       }
-    }
-  },
-  "permissions": {
-    "product-snapshot:access": "Open ProductSnapshot menu",
-    "product-snapshot:create": "Create ProductSnapshot related data",
-    "product-snapshot:read": "View ProductSnapshot related data",
-    "product-snapshot:update": "Update ProductSnapshot related data",
-    "product-snapshot:delete": "Delete ProductSnapshot related data"
-  },
-  "settings": {
-    "ProductSnapshot": {
-      "Enabled": {
-        "title": "ProductSnapshot Enabled",
-        "description": "ProductSnapshot Enabled setting"
+    },
+    "permissions": {
+      "product-snapshot:access": "Open ProductSnapshot menu",
+      "product-snapshot:create": "Create ProductSnapshot related data",
+      "product-snapshot:read": "View ProductSnapshot related data",
+      "product-snapshot:update": "Update ProductSnapshot related data",
+      "product-snapshot:delete": "Delete ProductSnapshot related data"
+    },
+    "settings": {
+      "ProductSnapshot": {
+        "Enabled": {
+          "title": "ProductSnapshot Enabled",
+          "description": "ProductSnapshot Enabled setting"
+        }
       }
     }
   }

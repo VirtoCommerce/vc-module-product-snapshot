@@ -48,7 +48,7 @@ angular.module(moduleName, [])
             productBladeResolver.registerHandler(function (context) {
                 var deferred = $q.defer();
                 var item = context.item;
-                var orderId = context.orderId;
+                var orderId = context.item.customerOrderId;
                 var parentBlade = context.blade;
 
                 snapshotResource.getByOrderAndProductId(

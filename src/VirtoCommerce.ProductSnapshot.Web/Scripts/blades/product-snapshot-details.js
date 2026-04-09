@@ -22,26 +22,28 @@ angular.module('VirtoCommerce.ProductSnapshot')
             }
 
             function buildDimensionFields(snapshot) {
+                var p = 'ProductSnapshot.blades.product-snapshot-details.labels.';
                 return [
-                    { label: 'Weight', value: snapshot.weight },
-                    { label: 'Weight unit', value: snapshot.weightUnit },
-                    { label: 'Height', value: snapshot.height },
-                    { label: 'Width', value: snapshot.width },
-                    { label: 'Length', value: snapshot.length },
-                    { label: 'Measure unit', value: snapshot.measureUnit },
+                    { label: p + 'weight', value: snapshot.weight },
+                    { label: p + 'weight-unit', value: snapshot.weightUnit },
+                    { label: p + 'height', value: snapshot.height },
+                    { label: p + 'width', value: snapshot.width },
+                    { label: p + 'length', value: snapshot.length },
+                    { label: p + 'measure-unit', value: snapshot.measureUnit },
                 ];
             }
 
             function buildOtherFields(snapshot) {
+                var p = 'ProductSnapshot.blades.product-snapshot-details.labels.';
                 return [
-                    { label: 'Vendor', value: snapshot.vendor },
-                    { label: 'Tax type', value: snapshot.taxType },
-                    { label: 'Shipping type', value: snapshot.shippingType },
-                    { label: 'Package type', value: snapshot.packageType },
-                    { label: 'GTIN', value: snapshot.gtin },
-                    { label: 'Manufacturer part #', value: snapshot.manufacturerPartNumber },
-                    { label: 'Enable review', value: snapshot.enableReview },
-                    { label: 'Has user agreement', value: snapshot.hasUserAgreement },
+                    { label: p + 'vendor', value: snapshot.vendor },
+                    { label: p + 'tax-type', value: snapshot.taxType },
+                    { label: p + 'shipping-type', value: snapshot.shippingType },
+                    { label: p + 'package-type', value: snapshot.packageType },
+                    { label: p + 'gtin', value: snapshot.gtin },
+                    { label: p + 'manufacturer-part', value: snapshot.manufacturerPartNumber },
+                    { label: p + 'enable-review', value: snapshot.enableReview },
+                    { label: p + 'has-user-agreement', value: snapshot.hasUserAgreement },
                 ];
             }
 
