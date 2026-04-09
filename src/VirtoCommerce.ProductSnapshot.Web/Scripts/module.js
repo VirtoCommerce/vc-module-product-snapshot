@@ -48,11 +48,11 @@ angular.module(moduleName, [])
             productBladeResolver.registerHandler(function (context) {
                 var deferred = $q.defer();
                 var item = context.item;
-                var order = context.blade.order;
+                var orderId = context.orderId;
                 var parentBlade = context.blade;
 
                 snapshotResource.getByOrderAndProductId(
-                    { orderId: order.id, productId: item.productId },
+                    { orderId: orderId, productId: item.productId },
                     function (snapshot) {
                         if (snapshot && snapshot.id) {
                             var newBlade = {
