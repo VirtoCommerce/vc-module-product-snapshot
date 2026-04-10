@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using PipelineNet.Middleware;
 using VirtoCommerce.CatalogModule.Core.Model;
@@ -20,18 +21,19 @@ public class LoadorderProductSnapshotMiddleware : IAsyncMiddleware<ExternalOrder
 
     public async Task Run(ExternalOrderProducts parameter, Func<ExternalOrderProducts, Task> next)
     {
-        if (parameter.OrderId.IsNullOrEmpty() || parameter.Products.IsNullOrEmpty())
+        if (parameter.OrderId.IsNullOrEmpty() || parameter.ProductIds.IsNullOrEmpty())
         {
             await next(parameter);
         }
 
         var snapshots = await _snapshotProvider.GetOrderProductSnapshotsAsync(parameter.OrderId);
 
+        parameter.Products ??= [];
         foreach (var snapshot in snapshots)
         {
-            if (parameter.Products.TryGetValue(snapshot.Id, out var product) && product == null)
+            if (parameter.ProductIds.ContainsIgnoreCase(snapshot.Id) && !parameter.Products.Any(x => x.Id.EqualsIgnoreCase(snapshot.Id)))
             {
-                parameter.Products[snapshot.Id] = GetExpProduct(snapshot);
+                parameter.Products.Add(GetExpProduct(snapshot));
             }
         }
 
