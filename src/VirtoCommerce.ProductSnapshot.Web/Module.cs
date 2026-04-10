@@ -56,7 +56,7 @@ public class Module : IModule, IHasConfiguration
         });
 
         // Xapi and Pipelines
-        var graphQlBuilder = new GraphQLBuilder(serviceCollection, builder =>
+        _ = new GraphQLBuilder(serviceCollection, builder =>
         {
             builder.AddSchema(serviceCollection, typeof(XapiAssemblyMarker));
         });

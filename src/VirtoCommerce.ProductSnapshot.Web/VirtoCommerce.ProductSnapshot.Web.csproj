@@ -26,4 +26,7 @@
     <ProjectReference Include="..\VirtoCommerce.ProductSnapshot.Data.SqlServer\VirtoCommerce.ProductSnapshot.Data.SqlServer.csproj" />
     <ProjectReference Include="..\VirtoCommerce.ProductSnapshot.ExperienceApi\VirtoCommerce.ProductSnapshot.ExperienceApi.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VirtoCommerce.XOrder.Data" Version="3.1002.0-alpha.100-vcst-4768" />
+  </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ namespace VirtoCommerce.ProductSnapshot.Data.Services;
 
 public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
 {
-    protected virtual int BatchSize => 20;
+    private const int BatchSize = 20;
 
     protected virtual string ProductSnapshotResponseGroup { get; } =
         (ItemResponseGroup.ItemInfo |
