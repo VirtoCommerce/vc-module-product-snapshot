@@ -37,7 +37,7 @@ public class ProductSnapshotController(
             return Forbid();
         }
 
-        var productSnapshots = await snapshotProvider.GetOrderProductSnapshotsAsync(orderId);
+        var productSnapshots = await snapshotProvider.GetOrderProductSnapshotsAsync(orderId, [productId]);
 
         var productSnapshot = productSnapshots.FirstOrDefault(x => x.Id == productId);
 
@@ -49,5 +49,4 @@ public class ProductSnapshotController(
         var authorizationResult = await authorizationService.AuthorizeAsync(User, order, new CanAccessOrderAuthorizationRequirement());
         return authorizationResult;
     }
-
 }

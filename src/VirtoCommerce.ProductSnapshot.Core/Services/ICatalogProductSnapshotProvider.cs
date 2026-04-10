@@ -10,4 +10,6 @@ public interface ICatalogProductSnapshotProvider
     Task SaveOrderProductSnapshotsAsync(CustomerOrder order);
 
     Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId);
+
+    Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId, IList<string> productIds);
 }

@@ -74,6 +74,19 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
         return snapshots.Select(x => x.Product).ToList();
     }
 
+    public async Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId, IList<string> productIds)
+    {
+        var searchCriteria = new OrderProductSnapshotSearchCriteria
+        {
+            OrderIds = [orderId],
+            ProductIds = productIds,
+        };
+
+        var snapshots = await _snapshotSearchService.SearchAllNoCloneAsync(searchCriteria);
+
+        return snapshots.Select(x => x.Product).ToList();
+    }
+
     private static List<OrderProductSnapshot> CreatOrderProductSnapshots(CustomerOrder order, IDictionary<string, List<(LineItem LineItem, ConfigurationItem ConfigurationItem)>> productToItemsMap, IList<CatalogProduct> products)
     {
         var snapshots = new List<OrderProductSnapshot>();

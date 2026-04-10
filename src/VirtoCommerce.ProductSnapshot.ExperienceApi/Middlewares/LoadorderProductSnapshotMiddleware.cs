@@ -26,12 +26,12 @@ public class LoadorderProductSnapshotMiddleware : IAsyncMiddleware<ExternalOrder
             await next(parameter);
         }
 
-        var snapshots = await _snapshotProvider.GetOrderProductSnapshotsAsync(parameter.OrderId);
+        var snapshots = await _snapshotProvider.GetOrderProductSnapshotsAsync(parameter.OrderId, parameter.ProductIds);
 
         parameter.Products ??= [];
         foreach (var snapshot in snapshots)
         {
-            if (parameter.ProductIds.ContainsIgnoreCase(snapshot.Id) && !parameter.Products.Any(x => x.Id.EqualsIgnoreCase(snapshot.Id)))
+            if (!parameter.Products.Any(x => x.Id.EqualsIgnoreCase(snapshot.Id)))
             {
                 parameter.Products.Add(GetExpProduct(snapshot));
             }
