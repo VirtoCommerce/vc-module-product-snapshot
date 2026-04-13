@@ -1,8 +1,10 @@
 angular.module('VirtoCommerce.ProductSnapshot')
-    .controller('VirtoCommerce.ProductSnapshot.ProductSnapshotDetails', [
-        '$scope',
-        function ($scope) {
+    .controller('VirtoCommerce.ProductSnapshot.ProductSnapshotDetails',  [
+        '$scope', 'platformWebApp.metaFormsService',
+        function ($scope, metaFormsService) {
             var blade = $scope.blade;
+
+            blade.metaFields = metaFormsService.getMetaFields("productSnapshotDetails");
 
             blade.refresh = function () {
                 blade.localizedNames = buildLocalizedNames(blade.snapshot);
