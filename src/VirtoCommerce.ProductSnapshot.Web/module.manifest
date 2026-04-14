@@ -11,11 +11,13 @@
     <dependency id="VirtoCommerce.Catalog" version="3.1014.0" />
   </dependencies>
 
-  <title>VirtoCommerce ProductSnapshot</title>
-  <description>VirtoCommerce ProductSnapshot</description>
+  <title>Product Snapshot</title>
+  <description>The Product Snapshot module captures and stores product information at the moment an order is created.
+  This ensures that customers and store operators always have access to the exact product details (prices, properties, images, descriptions)
+  that were valid at the time of purchase, even if the product catalog is later modified or products are deleted.</description>
 
   <authors>
-    <author>VirtoCommerce</author>
+    <author>Konstantin Savosteev</author>
   </authors>
   <owners>
     <owner>VirtoCommerce</owner>
