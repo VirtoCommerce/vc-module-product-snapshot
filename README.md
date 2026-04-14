@@ -2,9 +2,12 @@
 
 ## Overview
 
-The Product Snapshot module captures and stores product information at the moment an order is created. This ensures that customers and store operators always have access to the exact product details (prices, properties, images, descriptions) that were valid at the time of purchase, even if the product catalog is later modified or products are deleted.
+The Product Snapshot module captures and stores product information at the moment an order is created.
+This ensures that customers and store operators always have access to the exact product details (prices, properties, images, descriptions)
+that were valid at the time of purchase, even if the product catalog is later modified or products are deleted.
 
-**Key scenario:** A category manager updates or removes a product from the catalog, but existing orders still display the original product information through snapshots. If a snapshot does not exist for a given product, the system falls back to loading the current product data from the catalog.
+A category manager updates or removes a product from the catalog, but existing orders still display the original product information through snapshots.
+If a snapshot does not exist for a given product, the system falls back to loading the current product data from the catalog.
 
 ## Features
 
@@ -13,6 +16,7 @@ The Product Snapshot module captures and stores product information at the momen
 - **Configurable** — snapshot creation can be enabled or disabled through a platform setting.
 - **Catalog fallback** — if a snapshot does not exist for a product, the current catalog product is loaded as a fallback.
 - **Granular permissions** — access, create, read, update, and delete operations are controlled by dedicated permissions.
+- **Extendable Product Snapshot Page** - the module provides extension points (productSnapshotDetails metaform and widget-container) on the Product Snapshot details page to display custom information related to the snapshot, such as links to related orders or custom product attributes.
 - **REST API** — retrieve a product snapshot via `GET /api/product-snapshots/order/{orderId}/product/{productId}`.
 - **GraphQL / Experience API integration** — the `LoadorderProductSnapshotMiddleware` transparently injects snapshots into the `ExternalOrderProducts` pipeline, so X-API consumers receive snapshot data without additional queries.
 - **Multi-database support** — SQL Server, MySQL, and PostgreSQL are supported out of the box.
