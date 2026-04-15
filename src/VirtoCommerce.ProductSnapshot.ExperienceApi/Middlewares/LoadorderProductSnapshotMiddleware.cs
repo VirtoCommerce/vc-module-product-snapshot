@@ -24,6 +24,7 @@ public class LoadorderProductSnapshotMiddleware : IAsyncMiddleware<ExternalOrder
         if (parameter.OrderId.IsNullOrEmpty() || parameter.ProductIds.IsNullOrEmpty())
         {
             await next(parameter);
+            return;
         }
 
         var snapshots = await _snapshotProvider.GetOrderProductSnapshotsAsync(parameter.OrderId, parameter.ProductIds);

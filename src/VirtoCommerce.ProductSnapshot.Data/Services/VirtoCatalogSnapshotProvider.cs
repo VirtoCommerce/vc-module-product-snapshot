@@ -41,13 +41,26 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
             return;
         }
 
-        var productToItemsMap = GetProductToItemsMap(order.Items);
-        if (productToItemsMap.Count == 0)
+        var productIds = GetProductIds(order.Items);
+        if (productIds.Count == 0)
         {
             return;
         }
 
-        foreach (var batchIds in productToItemsMap.Keys.Paginate(BatchSize))
+        // Never overwrite existing snapshots — only create snapshots for products
+        // that don't already have one for this order. Combined with the unique
+        // (OrderId, ProductId) index, this enforces one-snapshot-per-product-per-order.
+        var existingProductIds = await GetExistingSnapshotProductIdsAsync(order.Id, productIds);
+        var newProductIds = productIds
+            .Where(id => !existingProductIds.Contains(id))
+            .ToList();
+
+        if (newProductIds.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var batchIds in newProductIds.Paginate(BatchSize))
         {
             var products = await _itemService.GetNoCloneAsync(batchIds, ProductSnapshotResponseGroup);
 
@@ -56,7 +69,7 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
                 continue;
             }
 
-            var snapshots = CreatOrderProductSnapshots(order, productToItemsMap, products);
+            var snapshots = CreateOrderProductSnapshots(order, products);
 
             await _snapshotService.SaveChangesAsync(snapshots);
         }
@@ -87,47 +100,43 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
         return snapshots.Select(x => x.Product).ToList();
     }
 
-    private static List<OrderProductSnapshot> CreatOrderProductSnapshots(CustomerOrder order, IDictionary<string, List<(LineItem LineItem, ConfigurationItem ConfigurationItem)>> productToItemsMap, IList<CatalogProduct> products)
+    private async Task<HashSet<string>> GetExistingSnapshotProductIdsAsync(string orderId, IList<string> productIds)
     {
-        var snapshots = new List<OrderProductSnapshot>();
-
-        foreach (var product in products.Where(x => x != null))
+        var searchCriteria = new OrderProductSnapshotSearchCriteria
         {
-            if (!productToItemsMap.TryGetValue(product.Id, out var items))
-            {
-                continue;
-            }
+            OrderIds = [orderId],
+            ProductIds = productIds,
+        };
 
-            var orderProductSnapshot = new OrderProductSnapshot
+        var existing = await _snapshotSearchService.SearchAllNoCloneAsync(searchCriteria);
+
+        return new HashSet<string>(existing.Select(x => x.ProductId), StringComparer.OrdinalIgnoreCase);
+    }
+
+    private static List<OrderProductSnapshot> CreateOrderProductSnapshots(CustomerOrder order, IList<CatalogProduct> products)
+    {
+        return products
+            .Where(x => x != null)
+            .Select(product => new OrderProductSnapshot
             {
                 OrderId = order.Id,
                 ProductId = product.Id,
+                Sku = product.Code,
                 Product = product,
-            };
-
-            foreach (var (lineItem, configurationItem) in items)
-            {
-                orderProductSnapshot.LineItemId = lineItem.Id;
-
-                if (configurationItem != null)
-                {
-                    orderProductSnapshot.ConfigurationItemId = configurationItem.Id;
-                }
-            }
-
-            snapshots.Add(orderProductSnapshot);
-        }
-
-        return snapshots;
+            })
+            .ToList();
     }
 
-    protected virtual IDictionary<string, List<(LineItem LineItem, ConfigurationItem ConfigurationItem)>> GetProductToItemsMap(ICollection<LineItem> items)
+    protected virtual IList<string> GetProductIds(ICollection<LineItem> items)
     {
-        var map = new Dictionary<string, List<(LineItem, ConfigurationItem)>>(StringComparer.OrdinalIgnoreCase);
+        var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var lineItem in items)
         {
-            AddToMap(lineItem.ProductId, lineItem);
+            if (!string.IsNullOrEmpty(lineItem.ProductId))
+            {
+                ids.Add(lineItem.ProductId);
+            }
 
             if (lineItem.ConfigurationItems.IsNullOrEmpty())
             {
@@ -136,28 +145,13 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
 
             foreach (var configurationItem in lineItem.ConfigurationItems)
             {
-                AddToMap(configurationItem.ProductId, lineItem, configurationItem);
+                if (!string.IsNullOrEmpty(configurationItem.ProductId))
+                {
+                    ids.Add(configurationItem.ProductId);
+                }
             }
         }
 
-        return map;
-
-        void AddToMap(string productId, LineItem lineItem, ConfigurationItem configurationItem = null)
-        {
-            if (string.IsNullOrEmpty(productId))
-            {
-                return;
-            }
-
-            if (!map.TryGetValue(productId, out var itemList))
-            {
-                itemList = [];
-                map[productId] = itemList;
-            }
-
-            itemList.Add((lineItem, configurationItem));
-        }
+        return ids.ToList();
     }
-
-
 }

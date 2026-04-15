@@ -31,6 +31,11 @@ public class OrderProductSnapshotSearchService(
             query = query.Where(x => criteria.OrderIds.Contains(x.OrderId));
         }
 
+        if (!criteria.ProductIds.IsNullOrEmpty())
+        {
+            query = query.Where(x => criteria.ProductIds.Contains(x.ProductId));
+        }
+
         return query;
     }
 

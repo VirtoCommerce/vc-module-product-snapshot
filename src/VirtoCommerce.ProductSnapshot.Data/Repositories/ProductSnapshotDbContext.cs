@@ -23,6 +23,10 @@ public class ProductSnapshotDbContext : DbContextBase
 
         modelBuilder.Entity<OrderProductSnapshotEntity>().ToTable("OrderProductSnapshot").HasKey(x => x.Id);
         modelBuilder.Entity<OrderProductSnapshotEntity>().Property(x => x.Id).HasMaxLength(IdLength).ValueGeneratedOnAdd();
+        modelBuilder.Entity<OrderProductSnapshotEntity>()
+            .HasIndex(x => new { x.OrderId, x.ProductId })
+            .IsUnique()
+            .HasDatabaseName("IX_OrderProductSnapshot_OrderId_ProductId");
 
         switch (Database.ProviderName)
         {

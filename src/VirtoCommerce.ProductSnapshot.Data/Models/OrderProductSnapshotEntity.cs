@@ -17,13 +17,6 @@ public class OrderProductSnapshotEntity : AuditableEntity, IDataEntity<OrderProd
     [StringLength(128)]
     public string ProductId { get; set; }
 
-    [Required]
-    [StringLength(128)]
-    public string LineItemId { get; set; }
-
-    [StringLength(128)]
-    public string ConfigurationItemId { get; set; }
-
     [StringLength(128)]
     public string Sku { get; set; }
 
@@ -38,8 +31,6 @@ public class OrderProductSnapshotEntity : AuditableEntity, IDataEntity<OrderProd
         model.ModifiedDate = ModifiedDate;
 
         model.OrderId = OrderId;
-        model.LineItemId = LineItemId;
-        model.ConfigurationItemId = ConfigurationItemId;
         model.ProductId = ProductId;
         model.Sku = Sku;
 
@@ -59,8 +50,6 @@ public class OrderProductSnapshotEntity : AuditableEntity, IDataEntity<OrderProd
         ModifiedDate = model.ModifiedDate;
 
         OrderId = model.OrderId;
-        LineItemId = model.LineItemId;
-        ConfigurationItemId = model.ConfigurationItemId;
         ProductId = model.ProductId;
         Sku = model.Sku;
 
@@ -72,8 +61,6 @@ public class OrderProductSnapshotEntity : AuditableEntity, IDataEntity<OrderProd
     public virtual void Patch(OrderProductSnapshotEntity target)
     {
         target.OrderId = OrderId;
-        target.LineItemId = LineItemId;
-        target.ConfigurationItemId = ConfigurationItemId;
         target.ProductId = ProductId;
         target.Sku = Sku;
         target.ProductJson = ProductJson;

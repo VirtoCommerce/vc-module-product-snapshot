@@ -18,8 +18,6 @@ namespace VirtoCommerce.ProductSnapshot.Data.SqlServer.Migrations
                     Id = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     OrderId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProductId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    LineItemId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ConfigurationItemId = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     Sku = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     ProductJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -31,6 +29,12 @@ namespace VirtoCommerce.ProductSnapshot.Data.SqlServer.Migrations
                 {
                     table.PrimaryKey("PK_OrderProductSnapshot", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProductSnapshot_OrderId_ProductId",
+                table: "OrderProductSnapshot",
+                columns: new[] { "OrderId", "ProductId" },
+                unique: true);
         }
 
         /// <inheritdoc />

@@ -29,8 +29,12 @@ public class CreateOrderProductSnapshotEventHandler : IEventHandler<OrderChanged
             return;
         }
 
+        // Process both newly created orders and modifications so that line items
+        // added after checkout also get snapshots. The provider only creates
+        // snapshots for products that don't already have one for the order,
+        // so existing snapshots are never overwritten.
         var orders = message.ChangedEntries
-            .Where(x => x.EntryState == EntryState.Added)
+            .Where(x => x.EntryState == EntryState.Added || x.EntryState == EntryState.Modified)
             .Select(x => x.NewEntry)
             .ToArray();
 
