@@ -21,7 +21,7 @@ public class LoadorderProductSnapshotMiddleware : IAsyncMiddleware<ExternalOrder
 
     public async Task Run(ExternalOrderProducts parameter, Func<ExternalOrderProducts, Task> next)
     {
-        if (parameter.OrderId.IsNullOrEmpty() || parameter.ProductIds.IsNullOrEmpty())
+        if (string.IsNullOrEmpty(parameter.OrderId))
         {
             await next(parameter);
             return;
