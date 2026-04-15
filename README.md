@@ -41,6 +41,49 @@ Navigate to **Platform Settings > ProductSnapshot > General** to configure.
 | `product-snapshot:update` | Update product snapshots |
 | `product-snapshot:delete` | Delete product snapshots |
 
+## Extensibility
+
+The Product Snapshot details blade exposes the `productSnapshotDetails` [metaform](https://docs.virtocommerce.org/platform/developer-guide/latest/Platform-Manager/Extensibility-Points/metaform/) and a widget container, allowing other modules to add custom properties and widgets without modifying this module.
+
+### Adding Custom Properties via Metaform
+
+Register additional fields in your module's `module.js` `run` block:
+
+```js
+angular.module('YourModule')
+    .run(['platformWebApp.metaFormsService', function (metaFormsService) {
+        metaFormsService.registerMetaFields("productSnapshotDetails", [
+            {
+                name: "customWarrantyInfo",
+                title: "Warranty Information",
+                valueType: "ShortText"
+            },
+            {
+                name: "isOversized",
+                title: "Oversized Item",
+                valueType: "Boolean"
+            }
+        ]);
+    }]);
+```
+
+Registered fields will appear at the bottom of the Product Snapshot details blade inside the `<va-metaform>` block. The field data is bound to the blade's `currentEntity` scope.
+
+### Adding Widgets
+
+You can also register widgets into the `productSnapshotDetails` widget container:
+
+```js
+angular.module('YourModule')
+    .run(['platformWebApp.widgetService', function (widgetService) {
+        var widget = {
+            controller: 'YourModule.YourWidgetController',
+            template: 'Modules/$(YourModule)/Scripts/widgets/your-widget.html'
+        };
+        widgetService.registerWidget(widget, 'productSnapshotDetails');
+    }]);
+```
+
 ## Architecture Schema
 
 ### Snapshot Lifecycle

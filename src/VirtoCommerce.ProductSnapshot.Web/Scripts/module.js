@@ -6,78 +6,33 @@ if (AppDependencies !== undefined) {
 }
 
 angular.module(moduleName, [])
-    .config(['$stateProvider',
-        function ($stateProvider) {
-            $stateProvider
-                .state('workspace.ProductSnapshotState', {
-                    url: '/product-snapshot',
-                    templateUrl: '$(Platform)/Scripts/common/templates/home.tpl.html',
-                    controller: [
-                        'platformWebApp.bladeNavigationService',
-                        function (bladeNavigationService) {
-                            var newBlade = {
-                                id: 'blade1',
-                                controller: 'VirtoCommerce.ProductSnapshot.helloWorldController',
-                                template: 'Modules/$(VirtoCommerce.ProductSnapshot)/Scripts/blades/hello-world.html',
-                                isClosingDisabled: true,
-                            };
-                            bladeNavigationService.showBlade(newBlade);
-                        }
-                    ]
-                });
-        }
-    ])
-    .run(['platformWebApp.mainMenuService',
-        '$state',
-        '$q',
-        'VirtoCommerce.ProductSnapshot.webApi',
-        'platformWebApp.bladeNavigationService',
-        'virtoCommerce.orderModule.productBladeResolver',
-        function (mainMenuService, $state, $q, snapshotResource, bladeNavigationService, productBladeResolver) {
-            //Register module in main menu
-            var menuItem = {
-                path: 'browse/product-snapshot',
-                icon: 'fa fa-cube',
-                title: 'ProductSnapshot',
-                priority: 100,
-                action: function () { $state.go('workspace.ProductSnapshotState'); },
-                permission: 'product-snapshot:access',
-            };
-            mainMenuService.addMenuItem(menuItem);
+    .run(['platformWebApp.bladeNavigationService',
+        'platformWebApp.toolbarService',
+        function (bladeNavigationService, toolbarService) {
+            // Register toolbar button on order line item detail blade
+            toolbarService.register({
+                name: 'ProductSnapshot.blades.product-snapshot-details.labels.product-snapshot',
+                icon: 'fa fa-camera',
+                executeMethod: function (blade) {
+                    var item = blade.currentEntity;
+                    var orderId = blade.order.id;
 
-            productBladeResolver.registerHandler(function (context) {
-                var deferred = $q.defer();
-                var item = context.item;
-                var orderId = context.item.customerOrderId;
-                var parentBlade = context.blade;
+                    var newBlade = {
+                        id: 'productSnapshotDetail',
+                        controller: 'VirtoCommerce.ProductSnapshot.ProductSnapshotDetails',
+                        template: 'Modules/$(VirtoCommerce.ProductSnapshot)/Scripts/blades/product-snapshot-details.html',
+                        hideToolbar: false,
+                        title: item.name,
+                        orderId: orderId,
+                        productId: item.productId
+                    };
 
-                snapshotResource.getByOrderAndProductId(
-                    { orderId: orderId, productId: item.productId },
-                    function (snapshot) {
-                        if (snapshot && snapshot.id) {
-                            var newBlade = {
-                                id: 'productSnapshotDetail',
-                                controller: 'VirtoCommerce.ProductSnapshot.ProductSnapshotDetails',
-                                template: 'Modules/$(VirtoCommerce.ProductSnapshot)/Scripts/blades/product-snapshot-details.html',
-                                hideToolbar: false,
-                                title: item.name,
-                                snapshot: snapshot,
-                                snapshotId: snapshot.id,
-                                productId: item.productId
-                            };
-
-                            bladeNavigationService.showBlade(newBlade, parentBlade);
-                            deferred.resolve(true);   // handled
-                        } else {
-                            deferred.resolve(false);  // continue chain
-                        }
-                    },
-                    function () {
-                        deferred.resolve(false);      // fall back on error
-                    }
-                );
-
-                return deferred.promise;
-            }, 100); // higher priority than default
+                    bladeNavigationService.showBlade(newBlade, blade);
+                },
+                canExecuteMethod: function (blade) {
+                    return blade && blade.currentEntity && blade.currentEntity.productId;
+                },
+                index: 3
+            }, 'virtoCommerce.orderModule.customerOrderItemDetailController');
         }
     ]);

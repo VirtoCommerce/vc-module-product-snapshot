@@ -2,7 +2,20 @@
   <div class="blade-inner">
     <div class="inner-block">
 
-      <div class="vc-snap">
+      <!-- Snapshot not found state -->
+      <div class="vc-snap__not-found" ng-if="!blade.isLoading && blade.notFound">
+        <div class="vc-snap__not-found-icon">
+          <i class="fa fa-camera-retro"></i>
+        </div>
+        <h3 class="vc-snap__not-found-title">
+          {{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-found-title' | translate }}
+        </h3>
+        <p class="vc-snap__not-found-message">
+          {{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-found-message' | translate }}
+        </p>
+      </div>
+
+      <div class="vc-snap" ng-if="!blade.isLoading && !blade.notFound && blade.snapshot">
 
         <!-- Top bar -->
         <div class="vc-snap__topbar">

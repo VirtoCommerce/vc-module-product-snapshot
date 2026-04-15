@@ -1,17 +1,38 @@
 angular.module('VirtoCommerce.ProductSnapshot')
-    .controller('VirtoCommerce.ProductSnapshot.ProductSnapshotDetails',  [
-        '$scope', 'platformWebApp.metaFormsService',
-        function ($scope, metaFormsService) {
+    .controller('VirtoCommerce.ProductSnapshot.ProductSnapshotDetails', [
+        '$scope',
+        'platformWebApp.metaFormsService',
+        'VirtoCommerce.ProductSnapshot.webApi',
+        function ($scope, metaFormsService, snapshotResource) {
             var blade = $scope.blade;
 
             blade.metaFields = metaFormsService.getMetaFields("productSnapshotDetails");
 
             blade.refresh = function () {
-                blade.localizedNames = buildLocalizedNames(blade.snapshot);
-                blade.dimensionFields = buildDimensionFields(blade.snapshot);
-                blade.otherFields = buildOtherFields(blade.snapshot);
+                blade.isLoading = true;
+                blade.notFound = false;
+                blade.snapshot = null;
 
-                blade.isLoading = false;
+                snapshotResource.getByOrderAndProductId(
+                    { orderId: blade.orderId, productId: blade.productId },
+                    function (snapshot) {
+                        if (snapshot && snapshot.id) {
+                            blade.snapshot = snapshot;
+                            blade.snapshotId = snapshot.id;
+                            blade.localizedNames = buildLocalizedNames(snapshot);
+                            blade.dimensionFields = buildDimensionFields(snapshot);
+                            blade.otherFields = buildOtherFields(snapshot);
+                            blade.notFound = false;
+                        } else {
+                            blade.notFound = true;
+                        }
+                        blade.isLoading = false;
+                    },
+                    function () {
+                        blade.notFound = true;
+                        blade.isLoading = false;
+                    }
+                );
             };
 
             function buildLocalizedNames(snapshot) {

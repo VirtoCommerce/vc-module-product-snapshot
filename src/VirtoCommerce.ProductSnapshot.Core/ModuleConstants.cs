@@ -33,7 +33,7 @@ public static class ModuleConstants
             public static SettingDescriptor ProductSnapshotEnabled { get; } = new()
             {
                 Name = "ProductSnapshot.Enabled",
-                GroupName = "ProductSnapshot|General",
+                GroupName = "Product Snapshot|General",
                 ValueType = SettingValueType.Boolean,
                 DefaultValue = false,
             };

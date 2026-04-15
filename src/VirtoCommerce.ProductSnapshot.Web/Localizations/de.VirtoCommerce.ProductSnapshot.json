@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Identifikation",
+          "dimensions": "Abmessungen & Versand",
+          "dates": "Daten",
+          "localized-names": "Lokalisierte Namen",
+          "other-fields": "Weitere Felder",
+          "properties": "Eigenschaften",
+          "images": "Bilder",
+          "reviews": "Bewertungen"
+        },
+        "labels": {
+          "product-snapshot": "Produkt-Snapshot",
+          "code": "Code",
+          "id": "ID",
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "buyable": "Kaufbar",
+          "track-inventory": "Bestand verfolgen",
+          "not-inherited": "Nicht vererbt",
+          "parent-category-active": "Übergeordnete Kategorie aktiv",
+          "pack": "Packung",
+          "min-qty": "Min. Menge",
+          "max-qty": "Max. Menge",
+          "unlimited": "unbegrenzt",
+          "priority": "Priorität",
+          "product-type": "Produkttyp",
+          "seo-object-type": "SEO-Objekttyp",
+          "catalog-id": "Katalog-ID",
+          "category-id": "Kategorie-ID",
+          "outer-id": "Externe ID",
+          "main-product-id": "Hauptprodukt-ID",
+          "weight": "Gewicht",
+          "weight-unit": "Gewichtseinheit",
+          "height": "Höhe",
+          "width": "Breite",
+          "length": "Länge",
+          "measure-unit": "Maßeinheit",
+          "start-date": "Startdatum",
+          "end-date": "Enddatum",
+          "indexing-date": "Indexierungsdatum",
+          "created-by": "Erstellt von",
+          "modified-by": "Geändert von",
+          "created-at": "Erstellt am",
+          "modified-at": "Geändert am",
+          "no-localized-names": "Keine lokalisierten Namen",
+          "vendor": "Anbieter",
+          "tax-type": "Steuerart",
+          "shipping-type": "Versandart",
+          "package-type": "Verpackungsart",
+          "gtin": "GTIN",
+          "manufacturer-part": "Hersteller-Teilenr.",
+          "enable-review": "Bewertung aktivieren",
+          "has-user-agreement": "Hat Benutzervereinbarung",
+          "prop-name": "Name",
+          "prop-value": "Wert",
+          "prop-type-flags": "Typ / Flags",
+          "not-set": "nicht gesetzt",
+          "flag-required": "erforderlich",
+          "flag-dictionary": "Wörterbuch",
+          "flag-multivalue": "mehrwertig",
+          "flag-multilang": "mehrsprachig",
+          "flag-inherited": "vererbt",
+          "entries": "{{ propertyCount }} Einträge",
+          "files": "{{ fileCount }} Dateien",
+          "blocks": "{{ blockCount }} Blöcke",
+          "not-found-title": "Snapshot nicht gefunden",
+          "not-found-message": "Für diese Bestellposition ist kein Produkt-Snapshot verfügbar. Stattdessen werden die aktuellen Produktdaten aus dem Katalog verwendet."
+        }
+      }
+    },
+    "permissions": {
+      "product-snapshot:access": "ProductSnapshot-Menü öffnen",
+      "product-snapshot:create": "ProductSnapshot-Daten erstellen",
+      "product-snapshot:read": "ProductSnapshot-Daten anzeigen",
+      "product-snapshot:update": "ProductSnapshot-Daten aktualisieren",
+      "product-snapshot:delete": "ProductSnapshot-Daten löschen"
+    },
+    "settings": {
+      "Product Snapshot": {
+        "Enabled": {
+          "title": "Product Snapshot aktiviert",
+          "description": "Automatische Erstellung von Produkt-Snapshots bei neuer Bestellung aktivieren oder deaktivieren"
+        }
+      }
+    }
+  }
+}

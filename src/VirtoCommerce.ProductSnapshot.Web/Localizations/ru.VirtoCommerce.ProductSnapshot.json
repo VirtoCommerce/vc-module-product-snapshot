@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Идентификация",
+          "dimensions": "Размеры и доставка",
+          "dates": "Даты",
+          "localized-names": "Локализованные названия",
+          "other-fields": "Другие поля",
+          "properties": "Свойства",
+          "images": "Изображения",
+          "reviews": "Отзывы"
+        },
+        "labels": {
+          "product-snapshot": "Снимок товара",
+          "code": "Код",
+          "id": "ID",
+          "active": "Активен",
+          "inactive": "Неактивен",
+          "buyable": "Доступен для покупки",
+          "track-inventory": "Отслеживать остатки",
+          "not-inherited": "Не унаследовано",
+          "parent-category-active": "Родительская категория активна",
+          "pack": "Упаковка",
+          "min-qty": "Мин. кол-во",
+          "max-qty": "Макс. кол-во",
+          "unlimited": "без ограничений",
+          "priority": "Приоритет",
+          "product-type": "Тип товара",
+          "seo-object-type": "Тип SEO-объекта",
+          "catalog-id": "ID каталога",
+          "category-id": "ID категории",
+          "outer-id": "Внешний ID",
+          "main-product-id": "ID основного товара",
+          "weight": "Вес",
+          "weight-unit": "Единица веса",
+          "height": "Высота",
+          "width": "Ширина",
+          "length": "Длина",
+          "measure-unit": "Единица измерения",
+          "start-date": "Дата начала",
+          "end-date": "Дата окончания",
+          "indexing-date": "Дата индексации",
+          "created-by": "Создал",
+          "modified-by": "Изменил",
+          "created-at": "Создано",
+          "modified-at": "Изменено",
+          "no-localized-names": "Нет локализованных названий",
+          "vendor": "Поставщик",
+          "tax-type": "Тип налога",
+          "shipping-type": "Тип доставки",
+          "package-type": "Тип упаковки",
+          "gtin": "GTIN",
+          "manufacturer-part": "Артикул производителя",
+          "enable-review": "Включить отзывы",
+          "has-user-agreement": "Пользовательское соглашение",
+          "prop-name": "Название",
+          "prop-value": "Значение",
+          "prop-type-flags": "Тип / флаги",
+          "not-set": "не задано",
+          "flag-required": "обязательное",
+          "flag-dictionary": "справочник",
+          "flag-multivalue": "множественное",
+          "flag-multilang": "многоязычное",
+          "flag-inherited": "унаследованное",
+          "entries": "{{ propertyCount }} записей",
+          "files": "{{ fileCount }} файлов",
+          "blocks": "{{ blockCount }} блоков",
+          "not-found-title": "Снимок не найден",
+          "not-found-message": "Для этой позиции заказа снимок товара недоступен. Вместо него будут использованы актуальные данные товара из каталога."
+        }
+      }
+    },
+    "permissions": {
+      "product-snapshot:access": "Открыть меню ProductSnapshot",
+      "product-snapshot:create": "Создавать данные ProductSnapshot",
+      "product-snapshot:read": "Просматривать данные ProductSnapshot",
+      "product-snapshot:update": "Обновлять данные ProductSnapshot",
+      "product-snapshot:delete": "Удалять данные ProductSnapshot"
+    },
+    "settings": {
+      "Product Snapshot": {
+        "Enabled": {
+          "title": "Product Snapshot включён",
+          "description": "Включить или отключить автоматическое создание снимков товаров при оформлении нового заказа"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "标识",
+          "dimensions": "尺寸与运输",
+          "dates": "日期",
+          "localized-names": "本地化名称",
+          "other-fields": "其他字段",
+          "properties": "属性",
+          "images": "图片",
+          "reviews": "评价"
+        },
+        "labels": {
+          "product-snapshot": "产品快照",
+          "code": "编码",
+          "id": "ID",
+          "active": "启用",
+          "inactive": "停用",
+          "buyable": "可购买",
+          "track-inventory": "跟踪库存",
+          "not-inherited": "未继承",
+          "parent-category-active": "父分类已启用",
+          "pack": "包装",
+          "min-qty": "最小数量",
+          "max-qty": "最大数量",
+          "unlimited": "无限制",
+          "priority": "优先级",
+          "product-type": "产品类型",
+          "seo-object-type": "SEO 对象类型",
+          "catalog-id": "目录 ID",
+          "category-id": "分类 ID",
+          "outer-id": "外部 ID",
+          "main-product-id": "主产品 ID",
+          "weight": "重量",
+          "weight-unit": "重量单位",
+          "height": "高度",
+          "width": "宽度",
+          "length": "长度",
+          "measure-unit": "计量单位",
+          "start-date": "开始日期",
+          "end-date": "结束日期",
+          "indexing-date": "索引日期",
+          "created-by": "创建者",
+          "modified-by": "修改者",
+          "created-at": "创建时间",
+          "modified-at": "修改时间",
+          "no-localized-names": "无本地化名称",
+          "vendor": "供应商",
+          "tax-type": "税种",
+          "shipping-type": "运输方式",
+          "package-type": "包装类型",
+          "gtin": "GTIN",
+          "manufacturer-part": "制造商零件号",
+          "enable-review": "启用评价",
+          "has-user-agreement": "用户协议",
+          "prop-name": "名称",
+          "prop-value": "值",
+          "prop-type-flags": "类型 / 标志",
+          "not-set": "未设置",
+          "flag-required": "必填",
+          "flag-dictionary": "字典",
+          "flag-multivalue": "多值",
+          "flag-multilang": "多语言",
+          "flag-inherited": "继承",
+          "entries": "{{ propertyCount }} 条目",
+          "files": "{{ fileCount }} 文件",
+          "blocks": "{{ blockCount }} 块",
+          "not-found-title": "未找到快照",
+          "not-found-message": "此订单行项目没有可用的产品快照。将改用目录中的当前产品数据。"
+        }
+      }
+    },
+    "permissions": {
+      "product-snapshot:access": "打开 ProductSnapshot 菜单",
+      "product-snapshot:create": "创建 ProductSnapshot 数据",
+      "product-snapshot:read": "查看 ProductSnapshot 数据",
+      "product-snapshot:update": "更新 ProductSnapshot 数据",
+      "product-snapshot:delete": "删除 ProductSnapshot 数据"
+    },
+    "settings": {
+      "Product Snapshot": {
+        "Enabled": {
+          "title": "Product Snapshot 已启用",
+          "description": "启用或禁用新订单创建时自动生成产品快照"
+        }
+      }
+    }
+  }
+}

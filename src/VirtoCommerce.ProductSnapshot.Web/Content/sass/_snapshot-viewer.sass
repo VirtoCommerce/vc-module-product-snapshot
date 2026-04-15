@@ -340,3 +340,29 @@ $ns: '.vc-snap'
   font-size: 10px
   color: var(--color-text-tertiary, #bbb)
   font-family: monospace
+
+// Not-found state
+#{$ns}__not-found
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 48px 24px
+  text-align: center
+  color: var(--color-text-secondary, #888)
+
+#{$ns}__not-found-icon
+  font-size: 48px
+  margin-bottom: 16px
+  color: var(--color-text-tertiary, #bbb)
+
+#{$ns}__not-found-title
+  font-size: 18px
+  font-weight: 500
+  margin: 0 0 8px 0
+  color: var(--color-text-primary, #333)
+
+#{$ns}__not-found-message
+  font-size: 14px
+  margin: 0
+  max-width: 420px

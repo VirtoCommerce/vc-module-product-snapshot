@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Identitet",
+          "dimensions": "Dimensjoner og frakt",
+          "dates": "Datoer",
+          "localized-names": "Lokaliserte navn",
+          "other-fields": "Andre felt",
+          "properties": "Egenskaper",
+          "images": "Bilder",
+          "reviews": "Anmeldelser"
+        },
+        "labels": {
+          "product-snapshot": "Produkt-øyeblikksbilde",
+          "code": "Kode",
+          "id": "ID",
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "buyable": "Kjøpbar",
+          "track-inventory": "Spor beholdning",
+          "not-inherited": "Ikke arvet",
+          "parent-category-active": "Overordnet kategori aktiv",
+          "pack": "Pakke",
+          "min-qty": "Min. antall",
+          "max-qty": "Maks. antall",
+          "unlimited": "ubegrenset",
+          "priority": "Prioritet",
+          "product-type": "Produkttype",
+          "seo-object-type": "SEO-objekttype",
+          "catalog-id": "Katalog-ID",
+          "category-id": "Kategori-ID",
+          "outer-id": "Ekstern ID",
+          "main-product-id": "Hovedprodukt-ID",
+          "weight": "Vekt",
+          "weight-unit": "Vektenhet",
+          "height": "Høyde",
+          "width": "Bredde",
+          "length": "Lengde",
+          "measure-unit": "Måleenhet",
+          "start-date": "Startdato",
+          "end-date": "Sluttdato",
+          "indexing-date": "Indekseringsdato",
+          "created-by": "Opprettet av",
+          "modified-by": "Endret av",
+          "created-at": "Opprettet",
+          "modified-at": "Endret",
+          "no-localized-names": "Ingen lokaliserte navn",
+          "vendor": "Leverandør",
+          "tax-type": "Avgiftstype",
+          "shipping-type": "Frakttype",
+          "package-type": "Emballasjetype",
+          "gtin": "GTIN",
+          "manufacturer-part": "Produsentnr.",
+          "enable-review": "Aktiver anmeldelse",
+          "has-user-agreement": "Har brukeravtale",
+          "prop-name": "Navn",
+          "prop-value": "Verdi",
+          "prop-type-flags": "Type / flagg",
+          "not-set": "ikke satt",
+          "flag-required": "påkrevd",
+          "flag-dictionary": "ordbok",
+          "flag-multivalue": "flerverdi",
+          "flag-multilang": "flerspråklig",
+          "flag-inherited": "arvet",
+          "entries": "{{ propertyCount }} oppføringer",
+          "files": "{{ fileCount }} filer",
+          "blocks": "{{ blockCount }} blokker",
+          "not-found-title": "Øyeblikksbilde ikke funnet",
+          "not-found-message": "Ingen produkt-øyeblikksbilde er tilgjengelig for denne ordrelinjen. Gjeldende produktdata fra katalogen brukes i stedet."
+        }
+      }
+    },
+    "permissions": {
+      "product-snapshot:access": "Åpne ProductSnapshot-menyen",
+      "product-snapshot:create": "Opprett ProductSnapshot-data",
+      "product-snapshot:read": "Vis ProductSnapshot-data",
+      "product-snapshot:update": "Oppdater ProductSnapshot-data",
+      "product-snapshot:delete": "Slett ProductSnapshot-data"
+    },
+    "settings": {
+      "Product Snapshot": {
+        "Enabled": {
+          "title": "Product Snapshot aktivert",
+          "description": "Aktiver eller deaktiver automatisk opprettelse av produkt-øyeblikksbilde ved ny bestilling"
+        }
+      }
+    }
+  }
+}

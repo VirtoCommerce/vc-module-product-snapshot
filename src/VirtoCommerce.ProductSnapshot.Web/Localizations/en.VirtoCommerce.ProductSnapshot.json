@@ -66,7 +66,9 @@
           "flag-inherited": "inherited",
           "entries": "{{ propertyCount }} entries",
           "files": "{{ fileCount }} files",
-          "blocks": "{{ blockCount }} blocks"
+          "blocks": "{{ blockCount }} blocks",
+          "not-found-title": "Snapshot not found",
+          "not-found-message": "No product snapshot is available for this order line item. The current product data from the catalog will be used instead."
         }
       }
     },
@@ -78,10 +80,10 @@
       "product-snapshot:delete": "Delete ProductSnapshot related data"
     },
     "settings": {
-      "ProductSnapshot": {
+      "Product Snapshot": {
         "Enabled": {
-          "title": "ProductSnapshot Enabled",
-          "description": "ProductSnapshot Enabled setting"
+          "title": "Product Snapshot Enabled",
+          "description": "Enable or disable automatic product snapshot creation when a new order is placed"
         }
       }
     }
