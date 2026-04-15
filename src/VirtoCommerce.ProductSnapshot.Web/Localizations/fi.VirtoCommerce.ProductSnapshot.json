@@ -71,20 +71,20 @@
           "not-found-message": "Tälle tilausriville ei ole saatavilla tuotteen tilannevedosta. Sen sijaan käytetään luettelon nykyisiä tuotetietoja."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Avaa ProductSnapshot-valikko",
-      "product-snapshot:create": "Luo ProductSnapshot-tietoja",
-      "product-snapshot:read": "Näytä ProductSnapshot-tietoja",
-      "product-snapshot:update": "Päivitä ProductSnapshot-tietoja",
-      "product-snapshot:delete": "Poista ProductSnapshot-tietoja"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot käytössä",
-          "description": "Ota käyttöön tai poista käytöstä automaattinen tuotteen tilannevedoksen luonti uuden tilauksen yhteydessä"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Avaa ProductSnapshot-valikko",
+    "product-snapshot:create": "Luo ProductSnapshot-tietoja",
+    "product-snapshot:read": "Näytä ProductSnapshot-tietoja",
+    "product-snapshot:update": "Päivitä ProductSnapshot-tietoja",
+    "product-snapshot:delete": "Poista ProductSnapshot-tietoja"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot käytössä",
+        "description": "Ota käyttöön tai poista käytöstä automaattinen tuotteen tilannevedoksen luonti uuden tilauksen yhteydessä"
       }
     }
   }

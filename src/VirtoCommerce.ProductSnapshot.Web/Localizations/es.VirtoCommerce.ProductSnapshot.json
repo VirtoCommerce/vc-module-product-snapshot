@@ -71,20 +71,20 @@
           "not-found-message": "No hay ninguna instantánea de producto disponible para esta línea del pedido. Se utilizarán los datos actuales del catálogo en su lugar."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Abrir menú de ProductSnapshot",
-      "product-snapshot:create": "Crear datos de ProductSnapshot",
-      "product-snapshot:read": "Ver datos de ProductSnapshot",
-      "product-snapshot:update": "Actualizar datos de ProductSnapshot",
-      "product-snapshot:delete": "Eliminar datos de ProductSnapshot"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot habilitado",
-          "description": "Habilitar o deshabilitar la creación automática de instantáneas de producto al realizar un nuevo pedido"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Abrir menú de ProductSnapshot",
+    "product-snapshot:create": "Crear datos de ProductSnapshot",
+    "product-snapshot:read": "Ver datos de ProductSnapshot",
+    "product-snapshot:update": "Actualizar datos de ProductSnapshot",
+    "product-snapshot:delete": "Eliminar datos de ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot habilitado",
+        "description": "Habilitar o deshabilitar la creación automática de instantáneas de producto al realizar un nuevo pedido"
       }
     }
   }

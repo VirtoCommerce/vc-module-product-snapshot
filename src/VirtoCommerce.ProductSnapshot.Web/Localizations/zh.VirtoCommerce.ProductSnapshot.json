@@ -71,20 +71,20 @@
           "not-found-message": "此订单行项目没有可用的产品快照。将改用目录中的当前产品数据。"
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "打开 ProductSnapshot 菜单",
-      "product-snapshot:create": "创建 ProductSnapshot 数据",
-      "product-snapshot:read": "查看 ProductSnapshot 数据",
-      "product-snapshot:update": "更新 ProductSnapshot 数据",
-      "product-snapshot:delete": "删除 ProductSnapshot 数据"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot 已启用",
-          "description": "启用或禁用新订单创建时自动生成产品快照"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "打开 ProductSnapshot 菜单",
+    "product-snapshot:create": "创建 ProductSnapshot 数据",
+    "product-snapshot:read": "查看 ProductSnapshot 数据",
+    "product-snapshot:update": "更新 ProductSnapshot 数据",
+    "product-snapshot:delete": "删除 ProductSnapshot 数据"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot 已启用",
+        "description": "启用或禁用新订单创建时自动生成产品快照"
       }
     }
   }

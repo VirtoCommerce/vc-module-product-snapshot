@@ -35,7 +35,7 @@ public static class ModuleConstants
                 Name = "ProductSnapshot.Enabled",
                 GroupName = "Product Snapshot|General",
                 ValueType = SettingValueType.Boolean,
-                DefaultValue = false,
+                DefaultValue = true,
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings

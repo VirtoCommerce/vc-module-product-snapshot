@@ -71,20 +71,20 @@
           "not-found-message": "Dla tej pozycji zamówienia nie jest dostępna żadna migawka produktu. Zamiast niej zostaną użyte bieżące dane produktu z katalogu."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Otwórz menu ProductSnapshot",
-      "product-snapshot:create": "Utwórz dane ProductSnapshot",
-      "product-snapshot:read": "Wyświetl dane ProductSnapshot",
-      "product-snapshot:update": "Zaktualizuj dane ProductSnapshot",
-      "product-snapshot:delete": "Usuń dane ProductSnapshot"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot włączony",
-          "description": "Włącz lub wyłącz automatyczne tworzenie migawek produktu przy nowym zamówieniu"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Otwórz menu ProductSnapshot",
+    "product-snapshot:create": "Utwórz dane ProductSnapshot",
+    "product-snapshot:read": "Wyświetl dane ProductSnapshot",
+    "product-snapshot:update": "Zaktualizuj dane ProductSnapshot",
+    "product-snapshot:delete": "Usuń dane ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "ProductSnapshot włączony",
+        "description": "Włącz lub wyłącz automatyczne tworzenie migawek produktu przy nowym zamówieniu"
       }
     }
   }

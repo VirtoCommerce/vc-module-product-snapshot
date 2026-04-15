@@ -71,20 +71,20 @@
           "not-found-message": "Для этой позиции заказа снимок товара недоступен. Вместо него будут использованы актуальные данные товара из каталога."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Открыть меню ProductSnapshot",
-      "product-snapshot:create": "Создавать данные ProductSnapshot",
-      "product-snapshot:read": "Просматривать данные ProductSnapshot",
-      "product-snapshot:update": "Обновлять данные ProductSnapshot",
-      "product-snapshot:delete": "Удалять данные ProductSnapshot"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot включён",
-          "description": "Включить или отключить автоматическое создание снимков товаров при оформлении нового заказа"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Открыть меню ProductSnapshot",
+    "product-snapshot:create": "Создавать данные ProductSnapshot",
+    "product-snapshot:read": "Просматривать данные ProductSnapshot",
+    "product-snapshot:update": "Обновлять данные ProductSnapshot",
+    "product-snapshot:delete": "Удалять данные ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot включён",
+        "description": "Включить или отключить автоматическое создание снимков товаров при оформлении нового заказа"
       }
     }
   }

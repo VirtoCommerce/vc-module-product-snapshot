@@ -71,20 +71,20 @@
           "not-found-message": "この注文明細に対応する商品スナップショットはありません。代わりにカタログの現在の商品データが使用されます。"
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "ProductSnapshotメニューを開く",
-      "product-snapshot:create": "ProductSnapshotデータを作成",
-      "product-snapshot:read": "ProductSnapshotデータを表示",
-      "product-snapshot:update": "ProductSnapshotデータを更新",
-      "product-snapshot:delete": "ProductSnapshotデータを削除"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot 有効",
-          "description": "新規注文時の商品スナップショット自動作成を有効または無効にする"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "ProductSnapshotメニューを開く",
+    "product-snapshot:create": "ProductSnapshotデータを作成",
+    "product-snapshot:read": "ProductSnapshotデータを表示",
+    "product-snapshot:update": "ProductSnapshotデータを更新",
+    "product-snapshot:delete": "ProductSnapshotデータを削除"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "ProductSnapshot 有効",
+        "description": "新規注文時の商品スナップショット自動作成を有効または無効にする"
       }
     }
   }

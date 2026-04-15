@@ -71,20 +71,20 @@
           "not-found-message": "Aucun instantané de produit n'est disponible pour cette ligne de commande. Les données actuelles du catalogue seront utilisées à la place."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Ouvrir le menu ProductSnapshot",
-      "product-snapshot:create": "Créer des données ProductSnapshot",
-      "product-snapshot:read": "Afficher les données ProductSnapshot",
-      "product-snapshot:update": "Mettre à jour les données ProductSnapshot",
-      "product-snapshot:delete": "Supprimer les données ProductSnapshot"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot activé",
-          "description": "Activer ou désactiver la création automatique d'instantanés de produit lors d'une nouvelle commande"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Ouvrir le menu ProductSnapshot",
+    "product-snapshot:create": "Créer des données ProductSnapshot",
+    "product-snapshot:read": "Afficher les données ProductSnapshot",
+    "product-snapshot:update": "Mettre à jour les données ProductSnapshot",
+    "product-snapshot:delete": "Supprimer les données ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot activé",
+        "description": "Activer ou désactiver la création automatique d'instantanés de produit lors d'une nouvelle commande"
       }
     }
   }

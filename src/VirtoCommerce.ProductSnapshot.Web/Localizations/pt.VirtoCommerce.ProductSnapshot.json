@@ -71,20 +71,20 @@
           "not-found-message": "Não há nenhum instantâneo de produto disponível para esta linha de pedido. Os dados atuais do produto do catálogo serão utilizados em vez disso."
         }
       }
-    },
-    "permissions": {
-      "product-snapshot:access": "Abrir menu ProductSnapshot",
-      "product-snapshot:create": "Criar dados ProductSnapshot",
-      "product-snapshot:read": "Visualizar dados ProductSnapshot",
-      "product-snapshot:update": "Atualizar dados ProductSnapshot",
-      "product-snapshot:delete": "Eliminar dados ProductSnapshot"
-    },
-    "settings": {
-      "Product Snapshot": {
-        "Enabled": {
-          "title": "Product Snapshot ativado",
-          "description": "Ativar ou desativar a criação automática de instantâneos de produto ao efetuar um novo pedido"
-        }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Abrir menu ProductSnapshot",
+    "product-snapshot:create": "Criar dados ProductSnapshot",
+    "product-snapshot:read": "Visualizar dados ProductSnapshot",
+    "product-snapshot:update": "Atualizar dados ProductSnapshot",
+    "product-snapshot:delete": "Eliminar dados ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "ProductSnapshot ativado",
+        "description": "Ativar ou desativar a criação automática de instantâneos de produto ao efetuar um novo pedido"
       }
     }
   }

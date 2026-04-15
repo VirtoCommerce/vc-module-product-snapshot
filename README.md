@@ -18,8 +18,9 @@ If a snapshot does not exist for a given product, the system falls back to loadi
 - **Granular permissions** — access, create, read, update, and delete operations are controlled by dedicated permissions.
 - **Extendable Product Snapshot Page** - the module provides extension points (productSnapshotDetails metaform and widget-container) on the Product Snapshot details page to display custom information related to the snapshot, such as links to related orders or custom product attributes.
 - **REST API** — retrieve a product snapshot via `GET /api/product-snapshots/order/{orderId}/product/{productId}`.
-- **GraphQL / Experience API integration** — the `LoadorderProductSnapshotMiddleware` transparently injects snapshots into the `ExternalOrderProducts` pipeline, so X-API consumers receive snapshot data without additional queries.
+- **GraphQL / Experience API integration** — the `LoadorderProductSnapshotMiddleware` transparently injects snapshots into the `ExternalOrderProducts` pipeline, so X-Order consumers receive snapshot data without additional queries.
 - **Multi-database support** — SQL Server, MySQL, and PostgreSQL are supported out of the box.
+- **Async snapshot creation (Soon)** — snapshot generation runs in the background to avoid impacting order processing performance. If snapshot creation fails, it is logged but does not block the order from being created.
 
 ## Screenshots
 
@@ -41,9 +42,9 @@ If a snapshot does not exist for a given product, the system falls back to loadi
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `ProductSnapshot.Enabled` | Boolean | `false` | Enables automatic product snapshot creation on new orders. Must be set to `true` to activate the module. |
+| `ProductSnapshot.Enabled` | Boolean | `true` | Enables automatic product snapshot creation on new orders. Must be set to `true` to activate the module. |
 
-Navigate to **Platform Settings > ProductSnapshot > General** to configure.
+Navigate to **Platform Settings > Product Snapshot > General** to configure.
 
 ### Permissions
 
