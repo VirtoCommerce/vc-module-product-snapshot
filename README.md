@@ -14,7 +14,7 @@ If a snapshot does not exist for a given product, the system falls back to loadi
 - **Automatic snapshot creation** — listens for the `OrderChangedEvent` and asynchronously creates product snapshots when a new order is placed.
 - **Full product data capture** — stores product info, assets, properties, and editorial reviews as a serialized JSON document.
 - **Configurable** — snapshot creation can be enabled or disabled through a platform setting.
-- **Catalog fallback** — if a snapshot does not exist for a product, the current catalog product is loaded as a fallback.
+- **Catalog fallback** — products not covered by a snapshot are loaded by xOrder's `OrderProductResolver.LoadProductsAsync` from the live catalog. The fallback is provided by xOrder, not by this module.
 - **Granular permissions** — access, create, read, update, and delete operations are controlled by dedicated permissions.
 - **Extendable Product Snapshot Page** - the module provides extension points (productSnapshotDetails metaform and widget-container) on the Product Snapshot details page to display custom information related to the snapshot, such as links to related orders or custom product attributes.
 - **REST API** — retrieve a product snapshot via `GET /api/product-snapshots/order/{orderId}/product/{productId}`.
@@ -55,6 +55,95 @@ Navigate to **Platform Settings > Product Snapshot > General** to configure.
 | `product-snapshot:read` | Read product snapshots |
 | `product-snapshot:update` | Update product snapshots |
 | `product-snapshot:delete` | Delete product snapshots |
+
+
+## Architecture Schema
+
+### Snapshot Lifecycle
+
+```
+┌──────────────────────────────┐
+│  Order Created or Updated    │
+│  (new line items added)      │
+└──────────────┬───────────────┘
+               │ OrderChangedEvent
+               │ (EntryState = Added or Modified)
+               v
+┌───────────────────────────────────────┐
+│ CreateOrderProductSnapshotEventHandler│
+│  - Checks ProductSnapshot.Enabled     │
+│  - Filters entries: Added | Modified  │
+└──────────────┬────────────────────────┘
+               │ for each surviving order
+               v
+┌───────────────────────────────────────┐
+│   VirtoCatalogSnapshotProvider        │
+│   .SaveOrderProductSnapshotsAsync     │
+│  - Collects product + configuration   │
+│    item ids from order line items     │
+│  - Skips ids already snapshotted      │
+│    for this OrderId (idempotent)      │
+│  - Loads products from Catalog        │
+│    (ItemInfo | ItemAssets |           │
+│     ItemProperties |                  │
+│     ItemEditorialReviews)             │
+│  - Serializes to JSON                 │
+│  - Saves in batches of 20             │
+└──────────────┬────────────────────────┘
+               │
+               v
+┌───────────────────────────────────────┐
+│      OrderProductSnapshot Table       │
+│  (OrderId, ProductId, Sku, Product)   │
+│  unique index: (OrderId, ProductId)   │
+└───────────────────────────────────────┘
+```
+
+Snapshots are written on **both** `Added` and `Modified` order change entries, so line items added to an existing order after creation are still captured. The handler ignores `Deleted` and `Unchanged` entries. A unique `(OrderId, ProductId)` constraint combined with the idempotent skip in the provider guarantees exactly one snapshot per product per order — re-saving an unchanged order is a no-op.
+
+### Snapshot Retrieval
+
+```
+┌──────────────────┐                 ┌──────────────────────────────┐
+│  REST API Call   │                 │  GraphQL / xAPI Query        │
+│  GET /api/...    │                 │  order.items { product {…} } │
+└────────┬─────────┘                 └──────────────┬───────────────┘
+         │                                          │
+         │                                          v
+         │                          ┌───────────────────────────────┐
+         │                          │  IOrderProductResolver        │
+         │                          │  (scoped, per-request cache)  │
+         │                          └──────────────┬────────────────┘
+         │                                         │
+         │                                         v
+         │                          ┌───────────────────────────────┐
+         │                          │  ExternalOrderProducts        │
+         │                          │  PipelineNet pipeline         │
+         │                          └──────────────┬────────────────┘
+         │                                         │
+         │                                         v
+         │                          ┌───────────────────────────────┐
+         │                          │ LoadorderProductSnapshotMW    │
+         │                          │  (this module)                │
+         │                          └──────────────┬────────────────┘
+         │                                         │
+         v                                         v
+┌──────────────────────────────────────┐   ┌───────────────────────────────┐
+│   ICatalogProductSnapshotProvider    │   │  Missing products?            │
+│  - Search snapshots by Order/Product │   │  OrderProductResolver         │
+│  - Return CatalogProduct objects     │   │  .LoadProductsAsync           │
+└──────────────────────────────────────┘   │  → XCatalog LoadProductsQuery │
+                                           │  (live catalog fallback)      │
+                                           └───────────────────────────────┘
+```
+
+REST API calls go straight through `ICatalogProductSnapshotProvider`. GraphQL / xAPI calls are routed through xOrder's `IOrderProductResolver`, which launches the `ExternalOrderProducts` pipeline. `LoadorderProductSnapshotMiddleware` fills in frozen snapshots; anything still missing falls through to xOrder's catalog fallback.
+
+### Field Coverage
+
+`LoadorderProductSnapshotMiddleware` wraps each snapshot in an `ExpProduct` with only `IndexedProduct` populated. Dynamic fields that normally come from the XCatalog pipeline (`AllPrices`, `Inventory` / `AllInventories`, `Vendor`, `Variations`, `MinVariationPrice`, availability flags) are **null or empty** in snapshot mode, because the middleware runs instead of the catalog enrichment middleware — not after it. Snapshots also capture only `ItemInfo | ItemAssets | ItemProperties | ItemEditorialReviews`, so `Associations`, `Outlines`, and `SeoInfos` on `IndexedProduct` itself are empty too.
+
+See [docs/default-vs-snapshot-mode.md](docs/default-vs-snapshot-mode.md) for the full property-by-property matrix, pros and cons, and guidance on extending the middleware or widening the captured response group.
 
 ## Extensibility
 
@@ -98,55 +187,6 @@ angular.module('YourModule')
         widgetService.registerWidget(widget, 'productSnapshotDetails');
     }]);
 ```
-
-## Architecture Schema
-
-### Snapshot Lifecycle
-
-```
-┌──────────────────┐
-│  Order Created   │
-└────────┬─────────┘
-         │ OrderChangedEvent (EntryState = Added)
-         v
-┌───────────────────────────────────────┐
-│ CreateOrderProductSnapshotEventHandler│
-│  - Checks ProductSnapshot.Enabled     │
-└────────┬──────────────────────────────┘
-         │
-         v
-┌───────────────────────────────────────┐
-│   VirtoCatalogSnapshotProvider        │
-│  - Loads products from Catalog        │
-│  - Serializes to JSON                 │
-│  - Saves OrderProductSnapshot         │
-└────────┬──────────────────────────────┘
-         │
-         v
-┌───────────────────────────────────────┐
-│      OrderProductSnapshot Table       │
-│  (OrderId, ProductId, ProductJson)    │
-└───────────────────────────────────────┘
-```
-
-### Snapshot Retrieval
-
-```
-┌──────────────────┐     ┌──────────────────────────┐
-│  REST API Call   │     │  GraphQL / X-API Query   │
-│  GET /api/...    │     │  ExternalOrderProducts   │
-└────────┬─────────┘     └────────┬─────────────────┘
-         │                        │
-         v                        v
-┌──────────────────────────────────────┐
-│   ICatalogProductSnapshotProvider    │
-│  - Search snapshots by Order/Product │
-│  - Deserialize ProductJson           │
-│  - Return CatalogProduct objects     │
-│  - Fallback to live catalog if none  │
-└──────────────────────────────────────┘
-```
-
 
 ## References
 

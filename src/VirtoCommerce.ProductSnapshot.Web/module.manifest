@@ -7,7 +7,7 @@
   <platformVersion>3.1016.0</platformVersion>
   <dependencies>
     <dependency id="VirtoCommerce.Orders" version="3.1005.0-alpha.1414-vcst-4768" />
-    <dependency id="VirtoCommerce.XOrder" version="3.1002.0-alpha.107-vcst-4768" />
+    <dependency id="VirtoCommerce.XOrder" version="3.1003.0-alpha.115-vcst-4768" />
     <dependency id="VirtoCommerce.Catalog" version="3.1014.0" />
   </dependencies>
 
