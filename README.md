@@ -21,6 +21,20 @@ If a snapshot does not exist for a given product, the system falls back to loadi
 - **GraphQL / Experience API integration** — the `LoadorderProductSnapshotMiddleware` transparently injects snapshots into the `ExternalOrderProducts` pipeline, so X-API consumers receive snapshot data without additional queries.
 - **Multi-database support** — SQL Server, MySQL, and PostgreSQL are supported out of the box.
 
+## Screenshots
+
+### View Product Snapshot 
+
+<img width="902" height="627" alt="image" src="https://github.com/user-attachments/assets/66fd73d0-fa3d-473b-989d-c978793f363a" />
+
+### Product Snapshot Blade
+
+<img width="921" height="629" alt="image" src="https://github.com/user-attachments/assets/659a0c11-c520-455f-af48-990224835c4e" />
+
+## Product Snapshot Blade - Fallback
+
+<img width="890" height="566" alt="image" src="https://github.com/user-attachments/assets/ce697145-6dd4-49d6-93fd-133c5b894af9" />
+
 ## Configuration
 
 ### Settings
