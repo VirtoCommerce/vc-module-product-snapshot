@@ -7,7 +7,6 @@ using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.ProductSnapshot.Core.Services;
-using VirtoCommerce.XOrder.Data.Authorization;
 using Permissions = VirtoCommerce.ProductSnapshot.Core.ModuleConstants.Security.Permissions;
 
 namespace VirtoCommerce.ProductSnapshot.Web.Controllers.Api;
@@ -16,9 +15,7 @@ namespace VirtoCommerce.ProductSnapshot.Web.Controllers.Api;
 [Route("api/product-snapshots")]
 public class ProductSnapshotController(
     ICatalogProductSnapshotProvider snapshotProvider,
-    ICustomerOrderService customerOrderService,
-    IAuthorizationService authorizationService
-    )
+    ICustomerOrderService customerOrderService)
     : Controller
 {
     [HttpGet("order/{orderId}/product/{productId}")]
@@ -31,22 +28,10 @@ public class ProductSnapshotController(
             return NotFound();
         }
 
-        var authorizationResult = await AuthorizeOrderAsync(order);
-        if (!authorizationResult.Succeeded)
-        {
-            return Forbid();
-        }
-
         var productSnapshots = await snapshotProvider.GetOrderProductSnapshotsAsync(orderId, [productId]);
 
         var productSnapshot = productSnapshots.FirstOrDefault(x => x.Id == productId);
 
         return Ok(productSnapshot);
-    }
-
-    private async Task<AuthorizationResult> AuthorizeOrderAsync(CustomerOrder order)
-    {
-        var authorizationResult = await authorizationService.AuthorizeAsync(User, order, new CanAccessOrderAuthorizationRequirement());
-        return authorizationResult;
     }
 }
