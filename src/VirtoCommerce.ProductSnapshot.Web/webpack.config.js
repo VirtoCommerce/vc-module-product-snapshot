@@ -13,6 +13,9 @@ function getEntryPoints(isProduction) {
         ...glob.sync('./Scripts/**/*.js', { nosort: true }),
         ...(isProduction ? glob.sync('./Scripts/**/*.html', { nosort: true }) : []),
         ...glob.sync('./Content/**/*.css', { nosort: true }),
+        // module sass/scss
+        ...glob.sync('./Content/**/*.sass', { nosort: true }),
+        ...glob.sync('./Content/**/*.scss', { nosort: true }),
     ];
 }
 
@@ -31,6 +34,19 @@ module.exports = (env, argv) => {
                 {
                     test: /\.css$/,
                     use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                },
+                {
+                    test: /\.(sass|scss)$/,
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                implementation: require('sass'),
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.html$/,

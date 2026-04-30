@@ -1,0 +1,368 @@
+// vc-snap — Product Snapshot Viewer styles
+
+$ns: '.vc-snap'
+
+// Top bar
+#{$ns}
+  margin-top: 15px
+
+#{$ns}__topbar
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+  flex-wrap: wrap
+  gap: 10px
+  margin-bottom: 16px
+
+#{$ns}__topbar-left
+  display: flex
+  flex-direction: column
+  gap: 3px
+
+#{$ns}__topbar-right
+  text-align: right
+
+#{$ns}__snapshot-label
+  font-size: 11px
+  font-weight: 500
+  letter-spacing: .06em
+  text-transform: uppercase
+  color: var(--color-text-tertiary, #999)
+
+#{$ns}__product-title
+  display: block
+  font-size: 17px
+  font-weight: 500
+  color: var(--color-text-primary, #1a1a1a)
+
+#{$ns}__product-sub
+  display: block
+  font-size: 12px
+  color: var(--color-text-tertiary, #999)
+
+#{$ns}__timestamp
+  font-size: 11px
+  color: var(--color-text-tertiary, #999)
+  white-space: nowrap
+
+// Pills
+
+#{$ns}__meta-row
+  display: flex
+  gap: 8px
+  flex-wrap: wrap
+  margin-bottom: 20px
+
+#{$ns}__pill
+  font-size: 11px
+  font-weight: 500
+  padding: 3px 10px
+  border-radius: 20px
+  border: 0.5px solid var(--color-border-secondary, #ccc)
+
+  &--active
+    background: var(--color-background-success, #eafaf1)
+    color: var(--color-text-success, #1e7e34)
+    border-color: var(--color-border-success, #1e7e34)
+
+  &--info
+    background: var(--color-background-info, #e8f4fd)
+    color: var(--color-text-info, #0c5460)
+    border-color: var(--color-border-info, #0c5460)
+
+  &--danger
+    background: var(--color-background-danger, #fdecea)
+    color: var(--color-text-danger, #721c24)
+    border-color: var(--color-border-danger, #721c24)
+
+  &--default
+    background: var(--color-background-secondary, #f5f5f5)
+    color: var(--color-text-secondary, #555)
+    border-color: var(--color-border-tertiary, #ddd)
+
+// Layout grid
+
+#{$ns}__grid3
+  display: grid
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+  gap: 12px
+  margin-bottom: 12px
+
+  @media (max-width: 768px)
+    grid-template-columns: 1fr
+
+//Card
+
+#{$ns}__card
+  background: var(--color-background-primary, #fff)
+  border-radius: var(--border-radius-lg, 12px)
+  overflow: hidden
+  margin-bottom: 12px
+
+#{$ns}__card-header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 9px 14px
+  font-size: 11px
+  font-weight: 500
+  letter-spacing: .06em
+  text-transform: uppercase
+  color: var(--color-text-tertiary, #999)
+#{$ns}__card-header-count
+  font-size: 12px
+  font-weight: 400
+  text-transform: none
+  letter-spacing: 0
+
+#{$ns}__card-body
+  padding: 14px
+
+//Stat grid
+
+#{$ns}__stat-grid
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 1px
+
+#{$ns}__stat
+  background: var(--color-background-primary, #fff)
+  padding: 11px 14px
+
+#{$ns}__stat-label
+  font-size: 11px
+  color: var(--color-text-tertiary, #999)
+  margin-bottom: 2px
+
+#{$ns}__stat-val
+  font-size: 13px
+  font-weight: 500
+  color: var(--color-text-primary, #1a1a1a)
+
+  &--mono
+    font-family: monospace
+    font-size: 11px
+    color: var(--color-text-secondary, #666)
+
+  &--null
+    font-size: 12px
+    color: var(--color-text-tertiary, #bbb)
+    font-style: italic
+
+// Tags & flags
+
+#{$ns}__tag
+  display: inline-block
+  font-size: 11px
+  font-weight: 500
+  padding: 2px 8px
+  border-radius: var(--border-radius-md, 8px)
+  background: var(--color-background-secondary, #f5f5f5)
+  color: var(--color-text-secondary, #555)
+  border: 0.5px solid var(--color-border-tertiary, #ddd)
+  margin: 1px 2px 1px 0
+
+  &--null
+    color: var(--color-text-tertiary, #bbb)
+    font-style: italic
+    background: transparent
+    border-style: dashed
+
+  &--inherited
+    opacity: .65
+
+  &--type-product
+    background: var(--color-background-info, #e8f4fd)
+    color: var(--color-text-info, #0c5460)
+    border-color: var(--color-border-info, #0c5460)
+
+  &--type-variation
+    background: var(--color-background-warning, #fff8e1)
+    color: var(--color-text-warning, #856404)
+    border-color: var(--color-border-warning, #856404)
+
+#{$ns}__flag
+  display: inline-block
+  font-size: 10px
+  padding: 1px 5px
+  border-radius: 3px
+  background: var(--color-background-secondary, #f5f5f5)
+  color: var(--color-text-tertiary, #999)
+  border: 0.5px solid var(--color-border-tertiary, #ddd)
+  margin: 1px 2px 1px 0
+
+// Properties table
+
+#{$ns}__prop-table
+  width: 100%
+  border-collapse: collapse
+
+  tr
+    border-bottom: none
+
+  td, th
+    padding: 7px 0
+    vertical-align: top
+    font-size: 12px
+
+  th
+    font-size: 10px
+    text-transform: uppercase
+    letter-spacing: .05em
+    color: var(--color-text-tertiary, #999)
+    font-weight: 500
+
+  &--full
+    td, th
+      padding: 7px 14px
+
+#{$ns}__prop-key
+  color: var(--color-text-secondary, #666)
+  width: 42%
+  padding-right: 12px !important
+
+#{$ns}__prop-name
+  font-weight: 500
+  color: var(--color-text-primary, #1a1a1a)
+  width: 30%
+
+#{$ns}__prop-flags
+  display: flex
+  gap: 3px
+  flex-wrap: wrap
+
+// Localized names
+
+#{$ns}__localized-table
+  width: 100%
+  border-collapse: collapse
+
+  tr
+    border-bottom: none
+
+  td
+    padding: 7px 0
+    font-size: 12px
+    vertical-align: top
+
+    &:first-child
+      width: 60px
+
+#{$ns}__lang-badge
+  display: inline-block
+  font-size: 10px
+  font-weight: 500
+  padding: 2px 6px
+  border-radius: var(--border-radius-md, 8px)
+  background: var(--color-background-secondary, #f5f5f5)
+  color: var(--color-text-secondary, #555)
+  border: 0.5px solid var(--color-border-tertiary, #ddd)
+
+// Images
+
+#{$ns}__img-grid
+  display: flex
+  flex-wrap: wrap
+  gap: 12px
+
+#{$ns}__img-item
+  display: flex
+  align-items: center
+  gap: 10px
+
+#{$ns}__img-thumb-box
+  width: 52px
+  height: 52px
+  flex-shrink: 0
+  border-radius: var(--border-radius-md, 8px)
+  border: 0.5px solid var(--color-border-tertiary, #e0e0e0)
+  background: var(--color-background-secondary, #f5f5f5)
+  display: flex
+  align-items: center
+  justify-content: center
+  font-size: 22px
+
+#{$ns}__img-sort
+  font-size: 11px
+  font-weight: 500
+  color: var(--color-text-secondary, #555)
+
+#{$ns}__img-meta
+  font-size: 11px
+  color: var(--color-text-tertiary, #999)
+  line-height: 1.4
+  word-break: break-all
+
+  &--mono
+    font-family: monospace
+
+// Reviews
+
+#{$ns}__review-block
+  padding: 10px 0
+
+  &:last-child
+    border-bottom: none
+
+#{$ns}__review-meta
+  display: flex
+  align-items: center
+  gap: 8px
+  flex-wrap: wrap
+  margin-bottom: 5px
+
+#{$ns}__review-type-badge
+  font-size: 11px
+  font-weight: 500
+  padding: 2px 8px
+  border-radius: var(--border-radius-md, 8px)
+  background: var(--color-background-secondary, #f5f5f5)
+  color: var(--color-text-secondary, #555)
+  border: 0.5px solid var(--color-border-tertiary, #ddd)
+
+#{$ns}__review-active
+  font-size: 11px
+  font-weight: 500
+  color: var(--color-text-success, #1e7e34)
+
+#{$ns}__review-preview
+  font-size: 11px
+  color: var(--color-text-secondary, #666)
+  font-family: monospace
+  line-height: 1.5
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+
+#{$ns}__review-id
+  margin-top: 4px
+  font-size: 10px
+  color: var(--color-text-tertiary, #bbb)
+  font-family: monospace
+
+// Not-found state
+#{$ns}__not-found
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  padding: 48px 24px
+  text-align: center
+  color: var(--color-text-secondary, #888)
+
+#{$ns}__not-found-icon
+  font-size: 48px
+  margin-bottom: 16px
+  color: var(--color-text-tertiary, #bbb)
+
+#{$ns}__not-found-title
+  font-size: 18px
+  font-weight: 500
+  margin: 0 0 8px 0
+  color: var(--color-text-primary, #333)
+
+#{$ns}__not-found-message
+  font-size: 14px
+  margin: 0
+  max-width: 420px

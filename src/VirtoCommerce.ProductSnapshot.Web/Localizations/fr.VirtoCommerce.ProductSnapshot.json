@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Identité",
+          "dimensions": "Dimensions et expédition",
+          "dates": "Dates",
+          "localized-names": "Noms localisés",
+          "other-fields": "Autres champs",
+          "properties": "Propriétés",
+          "images": "Images",
+          "reviews": "Avis"
+        },
+        "labels": {
+          "product-snapshot": "Instantané du produit",
+          "code": "Code",
+          "id": "ID",
+          "active": "Actif",
+          "inactive": "Inactif",
+          "buyable": "Achetable",
+          "track-inventory": "Suivi de stock",
+          "not-inherited": "Non hérité",
+          "parent-category-active": "Catégorie parente active",
+          "pack": "Lot",
+          "min-qty": "Qté min.",
+          "max-qty": "Qté max.",
+          "unlimited": "illimité",
+          "priority": "Priorité",
+          "product-type": "Type de produit",
+          "seo-object-type": "Type d'objet SEO",
+          "catalog-id": "ID du catalogue",
+          "category-id": "ID de la catégorie",
+          "outer-id": "ID externe",
+          "main-product-id": "ID du produit principal",
+          "weight": "Poids",
+          "weight-unit": "Unité de poids",
+          "height": "Hauteur",
+          "width": "Largeur",
+          "length": "Longueur",
+          "measure-unit": "Unité de mesure",
+          "start-date": "Date de début",
+          "end-date": "Date de fin",
+          "indexing-date": "Date d'indexation",
+          "created-by": "Créé par",
+          "modified-by": "Modifié par",
+          "created-at": "Créé le",
+          "modified-at": "Modifié le",
+          "no-localized-names": "Aucun nom localisé",
+          "vendor": "Fournisseur",
+          "tax-type": "Type de taxe",
+          "shipping-type": "Type d'expédition",
+          "package-type": "Type d'emballage",
+          "gtin": "GTIN",
+          "manufacturer-part": "Réf. fabricant",
+          "enable-review": "Activer les avis",
+          "has-user-agreement": "Accord utilisateur",
+          "prop-name": "Nom",
+          "prop-value": "Valeur",
+          "prop-type-flags": "Type / indicateurs",
+          "not-set": "non défini",
+          "flag-required": "obligatoire",
+          "flag-dictionary": "dictionnaire",
+          "flag-multivalue": "multivaleur",
+          "flag-multilang": "multilingue",
+          "flag-inherited": "hérité",
+          "entries": "{{ propertyCount }} entrées",
+          "files": "{{ fileCount }} fichiers",
+          "blocks": "{{ blockCount }} blocs",
+          "not-found-title": "Instantané introuvable",
+          "not-found-message": "Aucun instantané de produit n'est disponible pour cette ligne de commande. Les données actuelles du catalogue seront utilisées à la place."
+        }
+      }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Ouvrir le menu ProductSnapshot",
+    "product-snapshot:create": "Créer des données ProductSnapshot",
+    "product-snapshot:read": "Afficher les données ProductSnapshot",
+    "product-snapshot:update": "Mettre à jour les données ProductSnapshot",
+    "product-snapshot:delete": "Supprimer les données ProductSnapshot"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot activé",
+        "description": "Activer ou désactiver la création automatique d'instantanés de produit lors d'une nouvelle commande"
+      }
+    }
+  }
+}

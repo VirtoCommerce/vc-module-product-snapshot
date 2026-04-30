@@ -1,0 +1,264 @@
+<div class="blade-content __xxlarge-wide">
+  <div class="blade-inner">
+    <div class="inner-block">
+
+      <!-- Snapshot not found state -->
+      <div class="vc-snap__not-found" ng-if="!blade.isLoading && blade.notFound">
+        <div class="vc-snap__not-found-icon">
+          <i class="fa fa-camera-retro"></i>
+        </div>
+        <h3 class="vc-snap__not-found-title">
+          {{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-found-title' | translate }}
+        </h3>
+        <p class="vc-snap__not-found-message">
+          {{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-found-message' | translate }}
+        </p>
+      </div>
+
+      <div class="vc-snap" ng-if="!blade.isLoading && !blade.notFound && blade.snapshot">
+
+        <!-- Top bar -->
+        <div class="vc-snap__topbar">
+          <div class="vc-snap__topbar-left">
+            <span class="vc-snap__snapshot-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.product-snapshot' | translate }}</span>
+            <span class="vc-snap__product-title">{{ blade.snapshot.name }}</span>
+            <span class="vc-snap__product-sub">
+              {{ 'ProductSnapshot.blades.product-snapshot-details.labels.code' | translate }}: {{ blade.snapshot.code }}
+              &nbsp;·&nbsp;
+              {{ 'ProductSnapshot.blades.product-snapshot-details.labels.id' | translate }}: {{ blade.snapshot.id }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Meta pills -->
+        <div class="vc-snap__meta-row">
+          <span class="vc-snap__pill" ng-class="blade.snapshot.isActive ? 'vc-snap__pill--active' : 'vc-snap__pill--danger'">
+            {{ (blade.snapshot.isActive ? 'ProductSnapshot.blades.product-snapshot-details.labels.active' : 'ProductSnapshot.blades.product-snapshot-details.labels.inactive') | translate }}
+          </span>
+          <span class="vc-snap__pill vc-snap__pill--active" ng-if="blade.snapshot.isBuyable">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.buyable' | translate }}</span>
+          <span class="vc-snap__pill vc-snap__pill--info" ng-if="blade.snapshot.trackInventory">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.track-inventory' | translate }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.productType">{{ blade.snapshot.productType }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="!blade.snapshot.isInherited">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-inherited' | translate }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.parentCategoryIsActive">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.parent-category-active' | translate }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.packSize != null">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.pack' | translate }}: {{ blade.snapshot.packSize }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.minQuantity != null">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.min-qty' | translate }}: {{ blade.snapshot.minQuantity }}</span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.maxQuantity != null">
+            {{ 'ProductSnapshot.blades.product-snapshot-details.labels.max-qty' | translate }}: {{ blade.snapshot.maxQuantity === 0 ? ('ProductSnapshot.blades.product-snapshot-details.labels.unlimited' | translate) : blade.snapshot.maxQuantity }}
+          </span>
+          <span class="vc-snap__pill vc-snap__pill--default" ng-if="blade.snapshot.priority != null">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.priority' | translate }}: {{ blade.snapshot.priority }}</span>
+        </div>
+
+        <!-- Identity / Dimensions / Dates -->
+        <div class="vc-snap__grid3">
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">{{ 'ProductSnapshot.blades.product-snapshot-details.groups.identity' | translate }}</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.product-type' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.productType">{{ blade.snapshot.productType }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.productType">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.seo-object-type' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.seoObjectType">{{ blade.snapshot.seoObjectType }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.seoObjectType">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.catalog-id' | translate }}</div>
+                <span class="vc-snap__stat-val vc-snap__stat-val--mono" ng-if="blade.snapshot.catalogId">{{ blade.snapshot.catalogId | truncate:16 }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.catalogId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.category-id' | translate }}</div>
+                <span class="vc-snap__stat-val vc-snap__stat-val--mono" ng-if="blade.snapshot.categoryId">{{ blade.snapshot.categoryId | truncate:16 }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.categoryId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.outer-id' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.outerId">{{ blade.snapshot.outerId }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.outerId">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.main-product-id' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.mainProductId">{{ blade.snapshot.mainProductId }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.mainProductId">null</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">{{ 'ProductSnapshot.blades.product-snapshot-details.groups.dimensions' | translate }}</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat" ng-repeat="field in blade.dimensionFields">
+                <div class="vc-snap__stat-label">{{ field.label | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="field.value != null">{{ field.value }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="field.value == null">null</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vc-snap__card">
+            <div class="vc-snap__card-header">{{ 'ProductSnapshot.blades.product-snapshot-details.groups.dates' | translate }}</div>
+            <div class="vc-snap__stat-grid">
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.start-date' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.startDate">{{ blade.snapshot.startDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.startDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.end-date' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.endDate">{{ blade.snapshot.endDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.endDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.created-at' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.createdDate">{{ blade.snapshot.createdDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.createdDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.modified-at' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.createdDate">{{ blade.snapshot.modifiedDate | date:'d MMM yyyy' }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.modifiedDate">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.created-by' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.createdBy">{{ blade.snapshot.createdBy }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.createdBy">null</span>
+              </div>
+              <div class="vc-snap__stat">
+                <div class="vc-snap__stat-label">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.modified-by' | translate }}</div>
+                <span class="vc-snap__stat-val" ng-if="blade.snapshot.modifiedBy">{{ blade.snapshot.modifiedBy }}</span>
+                <span class="vc-snap__stat-val vc-snap__stat-val--null" ng-if="!blade.snapshot.modifiedBy">null</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Localized names -->
+        <div class="vc-snap__card">
+          <div class="vc-snap__card-header">{{ 'ProductSnapshot.blades.product-snapshot-details.groups.localized-names' | translate }}</div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__localized-table">
+              <tr ng-if="blade.localizedNames.length === 0">
+                <td><span class="vc-snap__tag vc-snap__tag--null">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.no-localized-names' | translate }}</span></td>
+              </tr>
+              <tr ng-repeat="item in blade.localizedNames">
+                <td><span class="vc-snap__lang-badge">{{ item.lang }}</span></td>
+                <td>{{ item.value }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Other fields -->
+        <div class="vc-snap__card">
+          <div class="vc-snap__card-header">{{ 'ProductSnapshot.blades.product-snapshot-details.groups.other-fields' | translate }}</div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__prop-table">
+              <tr ng-repeat="field in blade.otherFields">
+                <td class="vc-snap__prop-key">{{ field.label | translate }}</td>
+                <td>
+                  <span class="vc-snap__tag" ng-if="field.value != null">{{ field.value }}</span>
+                  <span class="vc-snap__tag vc-snap__tag--null" ng-if="field.value == null">null</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Properties -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.properties.length">
+          <div class="vc-snap__card-header">
+            {{ 'ProductSnapshot.blades.product-snapshot-details.groups.properties' | translate }}
+            <span class="vc-snap__card-header-count">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.entries' | translate: { propertyCount:blade.snapshot.properties.length } }}</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <table class="vc-snap__prop-table vc-snap__prop-table--full">
+              <thead>
+                <tr>
+                  <th>{{ 'ProductSnapshot.blades.product-snapshot-details.labels.prop-name' | translate }}</th>
+                  <th>{{ 'ProductSnapshot.blades.product-snapshot-details.labels.prop-value' | translate }}</th>
+                  <th>{{ 'ProductSnapshot.blades.product-snapshot-details.labels.prop-type-flags' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="prop in blade.snapshot.properties">
+                  <td class="vc-snap__prop-name">{{ prop.name }}</td>
+                  <td>
+                    <span ng-if="prop.values.length">
+                      <span class="vc-snap__tag" ng-class="{ 'vc-snap__tag--inherited': prop.isInherited }"
+                            ng-repeat="v in prop.values">{{ v.value }}</span>
+                    </span>
+                    <span class="vc-snap__tag vc-snap__tag--null" ng-if="!prop.values.length">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.not-set' | translate }}</span>
+                  </td>
+                  <td>
+                    <div class="vc-snap__prop-flags">
+                      <span class="vc-snap__tag" ng-class="prop.type === 'Variation' ? 'vc-snap__tag--type-variation' : 'vc-snap__tag--type-product'">{{ prop.type }}</span>
+                      <span class="vc-snap__tag">{{ prop.valueType }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.required">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.flag-required' | translate }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.dictionary">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.flag-dictionary' | translate }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.multivalue">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.flag-multivalue' | translate }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.multilanguage">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.flag-multilang' | translate }}</span>
+                      <span class="vc-snap__flag" ng-if="prop.isInherited">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.flag-inherited' | translate }}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Images -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.images.length">
+          <div class="vc-snap__card-header">
+            {{ 'ProductSnapshot.blades.product-snapshot-details.groups.images' | translate }}
+            <span class="vc-snap__card-header-count">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.files' | translate: { fileCount:blade.snapshot.images.length } }}</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <div class="vc-snap__img-grid">
+              <div class="vc-snap__img-item" ng-repeat="img in blade.snapshot.images">
+                <div class="vc-snap__img-thumb-box">&#127911;</div>
+                <div>
+                  <div class="vc-snap__img-sort">#{{ img.sortOrder }}</div>
+                  <div class="vc-snap__img-meta">{{ img.name | truncateStart:60 }}</div>
+                  <div class="vc-snap__img-meta vc-snap__img-meta--mono">{{ img.id }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="vc-snap__card" ng-if="blade.snapshot.reviews.length">
+          <div class="vc-snap__card-header">
+            {{ 'ProductSnapshot.blades.product-snapshot-details.groups.reviews' | translate }}
+            <span class="vc-snap__card-header-count">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.blocks' | translate: { blockCount:blade.snapshot.reviews.length } }}</span>
+          </div>
+          <div class="vc-snap__card-body">
+            <div class="vc-snap__review-block" ng-repeat="review in blade.snapshot.reviews">
+              <div class="vc-snap__review-meta">
+                <span class="vc-snap__review-type-badge">{{ review.reviewType }}</span>
+                <span class="vc-snap__lang-badge">{{ review.languageCode }}</span>
+                <span class="vc-snap__review-active" ng-if="!review.isInherited">{{ 'ProductSnapshot.blades.product-snapshot-details.labels.active' | translate }}</span>
+              </div>
+              <div class="vc-snap__review-preview" ng-bind-html="review.content | sanitize"></div>
+              <div class="vc-snap__review-id">{{ review.id }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Extensions block -->
+      <div>
+        <form class="form" name="productSnapshotDetailsForm">
+          <va-metaform blade="blade" registered-inputs="blade.metaFields"></va-metaform>
+        </form>
+        <va-widget-container group="productSnapshotDetails" blade="blade"></va-widget-container>
+      </div>
+
+    </div>
+  </div>
+</div>

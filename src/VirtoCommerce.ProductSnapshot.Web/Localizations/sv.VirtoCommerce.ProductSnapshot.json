@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Identitet",
+          "dimensions": "Dimensioner och frakt",
+          "dates": "Datum",
+          "localized-names": "Lokaliserade namn",
+          "other-fields": "Övriga fält",
+          "properties": "Egenskaper",
+          "images": "Bilder",
+          "reviews": "Recensioner"
+        },
+        "labels": {
+          "product-snapshot": "Produktögonblicksbild",
+          "code": "Kod",
+          "id": "ID",
+          "active": "Aktiv",
+          "inactive": "Inaktiv",
+          "buyable": "Köpbar",
+          "track-inventory": "Spåra lager",
+          "not-inherited": "Ej ärvd",
+          "parent-category-active": "Överordnad kategori aktiv",
+          "pack": "Förpackning",
+          "min-qty": "Min. antal",
+          "max-qty": "Max. antal",
+          "unlimited": "obegränsat",
+          "priority": "Prioritet",
+          "product-type": "Produkttyp",
+          "seo-object-type": "SEO-objekttyp",
+          "catalog-id": "Katalog-ID",
+          "category-id": "Kategori-ID",
+          "outer-id": "Externt ID",
+          "main-product-id": "Huvudprodukt-ID",
+          "weight": "Vikt",
+          "weight-unit": "Viktenhet",
+          "height": "Höjd",
+          "width": "Bredd",
+          "length": "Längd",
+          "measure-unit": "Måttenhet",
+          "start-date": "Startdatum",
+          "end-date": "Slutdatum",
+          "indexing-date": "Indexeringsdatum",
+          "created-by": "Skapad av",
+          "modified-by": "Ändrad av",
+          "created-at": "Skapad",
+          "modified-at": "Ändrad",
+          "no-localized-names": "Inga lokaliserade namn",
+          "vendor": "Leverantör",
+          "tax-type": "Skattetyp",
+          "shipping-type": "Frakttyp",
+          "package-type": "Förpackningstyp",
+          "gtin": "GTIN",
+          "manufacturer-part": "Tillverkarens artikelnr",
+          "enable-review": "Aktivera recension",
+          "has-user-agreement": "Användaravtal",
+          "prop-name": "Namn",
+          "prop-value": "Värde",
+          "prop-type-flags": "Typ / flaggor",
+          "not-set": "ej angett",
+          "flag-required": "obligatorisk",
+          "flag-dictionary": "ordbok",
+          "flag-multivalue": "flervärdes",
+          "flag-multilang": "flerspråkig",
+          "flag-inherited": "ärvd",
+          "entries": "{{ propertyCount }} poster",
+          "files": "{{ fileCount }} filer",
+          "blocks": "{{ blockCount }} block",
+          "not-found-title": "Ögonblicksbild hittades inte",
+          "not-found-message": "Ingen produktögonblicksbild är tillgänglig för denna orderrad. Aktuell produktdata från katalogen används i stället."
+        }
+      }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Öppna ProductSnapshot-menyn",
+    "product-snapshot:create": "Skapa ProductSnapshot-data",
+    "product-snapshot:read": "Visa ProductSnapshot-data",
+    "product-snapshot:update": "Uppdatera ProductSnapshot-data",
+    "product-snapshot:delete": "Ta bort ProductSnapshot-data"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot aktiverad",
+        "description": "Aktivera eller inaktivera automatiskt skapande av produktögonblicksbild vid ny beställning"
+      }
+    }
+  }
+}

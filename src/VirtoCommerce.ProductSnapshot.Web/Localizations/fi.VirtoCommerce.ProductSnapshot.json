@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "Tunniste",
+          "dimensions": "Mitat ja toimitus",
+          "dates": "Päivämäärät",
+          "localized-names": "Lokalisoidut nimet",
+          "other-fields": "Muut kentät",
+          "properties": "Ominaisuudet",
+          "images": "Kuvat",
+          "reviews": "Arvostelut"
+        },
+        "labels": {
+          "product-snapshot": "Tuotteen tilannevedos",
+          "code": "Koodi",
+          "id": "ID",
+          "active": "Aktiivinen",
+          "inactive": "Ei aktiivinen",
+          "buyable": "Ostettavissa",
+          "track-inventory": "Seuraa varastoa",
+          "not-inherited": "Ei peritty",
+          "parent-category-active": "Yläkategoria aktiivinen",
+          "pack": "Pakkaus",
+          "min-qty": "Min. määrä",
+          "max-qty": "Maks. määrä",
+          "unlimited": "rajoittamaton",
+          "priority": "Prioriteetti",
+          "product-type": "Tuotetyyppi",
+          "seo-object-type": "SEO-objektityyppi",
+          "catalog-id": "Luettelo-ID",
+          "category-id": "Kategoria-ID",
+          "outer-id": "Ulkoinen ID",
+          "main-product-id": "Päätuotteen ID",
+          "weight": "Paino",
+          "weight-unit": "Painoyksikkö",
+          "height": "Korkeus",
+          "width": "Leveys",
+          "length": "Pituus",
+          "measure-unit": "Mittayksikkö",
+          "start-date": "Alkamispäivä",
+          "end-date": "Päättymispäivä",
+          "indexing-date": "Indeksointipäivä",
+          "created-by": "Luonut",
+          "modified-by": "Muokannut",
+          "created-at": "Luotu",
+          "modified-at": "Muokattu",
+          "no-localized-names": "Ei lokalisoituja nimiä",
+          "vendor": "Toimittaja",
+          "tax-type": "Verotyyppi",
+          "shipping-type": "Toimitustyyppi",
+          "package-type": "Pakkaustyyppi",
+          "gtin": "GTIN",
+          "manufacturer-part": "Valmistajan osanro",
+          "enable-review": "Ota arvostelu käyttöön",
+          "has-user-agreement": "Käyttäjäsopimus",
+          "prop-name": "Nimi",
+          "prop-value": "Arvo",
+          "prop-type-flags": "Tyyppi / liput",
+          "not-set": "ei asetettu",
+          "flag-required": "pakollinen",
+          "flag-dictionary": "sanakirja",
+          "flag-multivalue": "moniarvoinen",
+          "flag-multilang": "monikielinen",
+          "flag-inherited": "peritty",
+          "entries": "{{ propertyCount }} merkintää",
+          "files": "{{ fileCount }} tiedostoa",
+          "blocks": "{{ blockCount }} lohkoa",
+          "not-found-title": "Tilannevedosta ei löytynyt",
+          "not-found-message": "Tälle tilausriville ei ole saatavilla tuotteen tilannevedosta. Sen sijaan käytetään luettelon nykyisiä tuotetietoja."
+        }
+      }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "Avaa ProductSnapshot-valikko",
+    "product-snapshot:create": "Luo ProductSnapshot-tietoja",
+    "product-snapshot:read": "Näytä ProductSnapshot-tietoja",
+    "product-snapshot:update": "Päivitä ProductSnapshot-tietoja",
+    "product-snapshot:delete": "Poista ProductSnapshot-tietoja"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "Product Snapshot käytössä",
+        "description": "Ota käyttöön tai poista käytöstä automaattinen tuotteen tilannevedoksen luonti uuden tilauksen yhteydessä"
+      }
+    }
+  }
+}

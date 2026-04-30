@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.virtocommerce.org)",
+      "WebSearch",
+      "WebFetch(domain:virtocommerce.com)",
+      "Bash(find /c/Projects/git/VirtoCommerce -name \"*.js\" -type f -exec grep -l \"productBladeResolver\" {} \\\\;)",
+      "Bash(xargs grep:*)",
+      "Bash(find /c/Projects/git/VirtoCommerce -name \"*.js\" -type f -exec grep -l \"registerHandler.*productBladeResolver\\\\|productBladeResolver.*registerHandler\" {} \\\\;)",
+      "Bash(grep -E \"^[^/]*Scripts/catalog\\\\.js|^[^/]*module\\\\.js$\")",
+      "Bash(find /c/Projects/git/VirtoCommerce/vc-module-catalog/src -name \"*.js\" -type f -exec grep -l \"registerHandler\\\\|BladeResolver\" {} \\\\;)"
+    ]
+  }
+}

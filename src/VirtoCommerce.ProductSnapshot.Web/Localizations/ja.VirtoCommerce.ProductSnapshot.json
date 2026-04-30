@@ -1,0 +1,91 @@
+{
+  "ProductSnapshot": {
+    "blades": {
+      "product-snapshot-details": {
+        "groups": {
+          "identity": "識別情報",
+          "dimensions": "寸法・配送",
+          "dates": "日付",
+          "localized-names": "ローカライズ名",
+          "other-fields": "その他のフィールド",
+          "properties": "プロパティ",
+          "images": "画像",
+          "reviews": "レビュー"
+        },
+        "labels": {
+          "product-snapshot": "商品スナップショット",
+          "code": "コード",
+          "id": "ID",
+          "active": "有効",
+          "inactive": "無効",
+          "buyable": "購入可能",
+          "track-inventory": "在庫追跡",
+          "not-inherited": "非継承",
+          "parent-category-active": "親カテゴリ有効",
+          "pack": "パック",
+          "min-qty": "最小数量",
+          "max-qty": "最大数量",
+          "unlimited": "無制限",
+          "priority": "優先度",
+          "product-type": "商品タイプ",
+          "seo-object-type": "SEOオブジェクトタイプ",
+          "catalog-id": "カタログID",
+          "category-id": "カテゴリID",
+          "outer-id": "外部ID",
+          "main-product-id": "メイン商品ID",
+          "weight": "重量",
+          "weight-unit": "重量単位",
+          "height": "高さ",
+          "width": "幅",
+          "length": "長さ",
+          "measure-unit": "測定単位",
+          "start-date": "開始日",
+          "end-date": "終了日",
+          "indexing-date": "インデックス日",
+          "created-by": "作成者",
+          "modified-by": "更新者",
+          "created-at": "作成日",
+          "modified-at": "更新日",
+          "no-localized-names": "ローカライズ名なし",
+          "vendor": "ベンダー",
+          "tax-type": "税タイプ",
+          "shipping-type": "配送タイプ",
+          "package-type": "梱包タイプ",
+          "gtin": "GTIN",
+          "manufacturer-part": "メーカー品番",
+          "enable-review": "レビューを有効化",
+          "has-user-agreement": "ユーザー同意あり",
+          "prop-name": "名前",
+          "prop-value": "値",
+          "prop-type-flags": "タイプ / フラグ",
+          "not-set": "未設定",
+          "flag-required": "必須",
+          "flag-dictionary": "辞書",
+          "flag-multivalue": "複数値",
+          "flag-multilang": "多言語",
+          "flag-inherited": "継承",
+          "entries": "{{ propertyCount }} 件",
+          "files": "{{ fileCount }} ファイル",
+          "blocks": "{{ blockCount }} ブロック",
+          "not-found-title": "スナップショットが見つかりません",
+          "not-found-message": "この注文明細に対応する商品スナップショットはありません。代わりにカタログの現在の商品データが使用されます。"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "product-snapshot:access": "ProductSnapshotメニューを開く",
+    "product-snapshot:create": "ProductSnapshotデータを作成",
+    "product-snapshot:read": "ProductSnapshotデータを表示",
+    "product-snapshot:update": "ProductSnapshotデータを更新",
+    "product-snapshot:delete": "ProductSnapshotデータを削除"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "ProductSnapshot 有効",
+        "description": "新規注文時の商品スナップショット自動作成を有効または無効にする"
+      }
+    }
+  }
+}

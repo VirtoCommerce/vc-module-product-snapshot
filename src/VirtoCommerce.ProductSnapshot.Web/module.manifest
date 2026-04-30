@@ -4,16 +4,20 @@
   <version>3.1000.0</version>
   <version-tag></version-tag>
 
-  <platformVersion>3.1007.0</platformVersion>
+  <platformVersion>3.1016.0</platformVersion>
   <dependencies>
-    <dependency id="VirtoCommerce.Xapi" version="3.1003.0" />
+    <dependency id="VirtoCommerce.Orders" version="3.1007.0" />
+    <dependency id="VirtoCommerce.XOrder" version="3.1004.0" />
+    <dependency id="VirtoCommerce.Catalog" version="3.1014.0" />
   </dependencies>
 
-  <title>VirtoCommerce ProductSnapshot</title>
-  <description>VirtoCommerce ProductSnapshot</description>
+  <title>Product Snapshot</title>
+  <description>The Product Snapshot module captures and stores product information at the moment an order is created.
+  This ensures that customers and store operators always have access to the exact product details (prices, properties, images, descriptions)
+  that were valid at the time of purchase, even if the product catalog is later modified or products are deleted.</description>
 
   <authors>
-    <author>VirtoCommerce</author>
+    <author>Konstantin Savosteev</author>
   </authors>
   <owners>
     <owner>VirtoCommerce</owner>

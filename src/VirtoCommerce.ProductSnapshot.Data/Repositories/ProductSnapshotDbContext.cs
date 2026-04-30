@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-//using VirtoCommerce.Platform.Data.Extensions;
 using VirtoCommerce.Platform.Data.Infrastructure;
+using VirtoCommerce.ProductSnapshot.Data.Models;
 
 namespace VirtoCommerce.ProductSnapshot.Data.Repositories;
 
@@ -21,7 +21,12 @@ public class ProductSnapshotDbContext : DbContextBase
     {
         base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Entity<ProductSnapshotEntity>().ToAuditableEntityTable("ProductSnapshot");
+        modelBuilder.Entity<OrderProductSnapshotEntity>().ToTable("OrderProductSnapshot").HasKey(x => x.Id);
+        modelBuilder.Entity<OrderProductSnapshotEntity>().Property(x => x.Id).HasMaxLength(IdLength).ValueGeneratedOnAdd();
+        modelBuilder.Entity<OrderProductSnapshotEntity>()
+            .HasIndex(x => new { x.OrderId, x.ProductId })
+            .IsUnique()
+            .HasDatabaseName("IX_OrderProductSnapshot_OrderId_ProductId");
 
         switch (Database.ProviderName)
         {
