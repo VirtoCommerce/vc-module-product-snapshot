@@ -24,7 +24,7 @@
   </owners>
 
   <projectUrl>https://github.com/VirtoCommerce/vc-module-product-snapshot</projectUrl>
-  <iconUrl>Modules/$(VirtoCommerce.ProductSnapshot)/Content/logo.png</iconUrl>
+  <iconUrl>Modules/$(VirtoCommerce.ProductSnapshot)/Content/logo.svg</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
 
   <assemblyFile>VirtoCommerce.ProductSnapshot.Web.dll</assemblyFile>
