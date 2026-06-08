@@ -38,11 +38,20 @@ public static class ModuleConstants
                 DefaultValue = true,
             };
 
+            public static SettingDescriptor ProductSnapshotBatchSize { get; } = new()
+            {
+                Name = "ProductSnapshot.BatchSize",
+                GroupName = "Product Snapshot|General",
+                ValueType = SettingValueType.Integer,
+                DefaultValue = 20,
+            };
+
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
             {
                 get
                 {
                     yield return ProductSnapshotEnabled;
+                    yield return ProductSnapshotBatchSize;
                 }
             }
         }

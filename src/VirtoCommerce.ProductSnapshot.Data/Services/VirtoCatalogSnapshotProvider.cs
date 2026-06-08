@@ -6,6 +6,8 @@ using VirtoCommerce.CatalogModule.Core.Model;
 using VirtoCommerce.CatalogModule.Core.Services;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.Settings;
+using VirtoCommerce.ProductSnapshot.Core;
 using VirtoCommerce.ProductSnapshot.Core.Models;
 using VirtoCommerce.ProductSnapshot.Core.Services;
 
@@ -13,8 +15,6 @@ namespace VirtoCommerce.ProductSnapshot.Data.Services;
 
 public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
 {
-    private const int BatchSize = 20;
-
     protected virtual string ProductSnapshotResponseGroup { get; } =
         (ItemResponseGroup.ItemInfo |
         ItemResponseGroup.ItemAssets |
@@ -24,14 +24,18 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
     private readonly IItemService _itemService;
     private readonly IOrderProductSnapshotService _snapshotService;
     private readonly IOrderProductSnapshotSearchService _snapshotSearchService;
+    private readonly ISettingsManager _settingsManager;
 
-    public VirtoCatalogSnapshotProvider(IItemService itemService,
+    public VirtoCatalogSnapshotProvider(
+        IItemService itemService,
         IOrderProductSnapshotService snapshotService,
-        IOrderProductSnapshotSearchService snapshotSearchService)
+        IOrderProductSnapshotSearchService snapshotSearchService,
+        ISettingsManager settingsManager)
     {
         _itemService = itemService;
         _snapshotService = snapshotService;
         _snapshotSearchService = snapshotSearchService;
+        _settingsManager = settingsManager;
     }
 
     public async Task SaveOrderProductSnapshotsAsync(CustomerOrder order)
@@ -60,19 +64,36 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
             return;
         }
 
-        foreach (var batchIds in newProductIds.Paginate(BatchSize))
+        var batchSize = await _settingsManager.GetValueAsync<int>(ModuleConstants.Settings.General.ProductSnapshotBatchSize);
+        var allSnapshots = new List<OrderProductSnapshot>();
+
+        foreach (var batchIds in newProductIds.Paginate(batchSize))
         {
             var products = await _itemService.GetNoCloneAsync(batchIds, ProductSnapshotResponseGroup);
 
-            if (products.IsNullOrEmpty())
+            if (!products.IsNullOrEmpty())
             {
-                continue;
+                allSnapshots.AddRange(CreateOrderProductSnapshots(order, products));
             }
-
-            var snapshots = CreateOrderProductSnapshots(order, products);
-
-            await _snapshotService.SaveChangesAsync(snapshots);
         }
+
+        if (allSnapshots.Count > 0)
+        {
+            await _snapshotService.SaveChangesAsync(allSnapshots);
+        }
+    }
+
+    public async Task<bool> HasOrderProductSnapshotsAsync(string orderId)
+    {
+        var searchCriteria = new OrderProductSnapshotSearchCriteria
+        {
+            OrderIds = [orderId],
+            Take = 1,
+        };
+
+        var result = await _snapshotSearchService.SearchAsync(searchCriteria);
+
+        return result.TotalCount > 0;
     }
 
     public async Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId)

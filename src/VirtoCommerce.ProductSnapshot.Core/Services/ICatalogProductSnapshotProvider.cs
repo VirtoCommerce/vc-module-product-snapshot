@@ -9,6 +9,8 @@ public interface ICatalogProductSnapshotProvider
 {
     Task SaveOrderProductSnapshotsAsync(CustomerOrder order);
 
+    Task<bool> HasOrderProductSnapshotsAsync(string orderId);
+
     Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId);
 
     Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId, IList<string> productIds);
