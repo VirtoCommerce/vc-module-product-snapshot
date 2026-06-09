@@ -30,6 +30,8 @@ public static class ModuleConstants
     {
         public static class General
         {
+            public const int DefaultBatchSize = 20;
+
             public static SettingDescriptor ProductSnapshotEnabled { get; } = new()
             {
                 Name = "ProductSnapshot.Enabled",
@@ -43,7 +45,7 @@ public static class ModuleConstants
                 Name = "ProductSnapshot.BatchSize",
                 GroupName = "Product Snapshot|General",
                 ValueType = SettingValueType.Integer,
-                DefaultValue = 20,
+                DefaultValue = DefaultBatchSize,
             };
 
             public static IEnumerable<SettingDescriptor> AllGeneralSettings
