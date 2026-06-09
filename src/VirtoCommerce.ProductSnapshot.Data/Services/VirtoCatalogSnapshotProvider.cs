@@ -6,8 +6,6 @@ using VirtoCommerce.CatalogModule.Core.Model;
 using VirtoCommerce.CatalogModule.Core.Services;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
-using VirtoCommerce.Platform.Core.Settings;
-using VirtoCommerce.ProductSnapshot.Core;
 using VirtoCommerce.ProductSnapshot.Core.Models;
 using VirtoCommerce.ProductSnapshot.Core.Services;
 
@@ -15,6 +13,8 @@ namespace VirtoCommerce.ProductSnapshot.Data.Services;
 
 public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
 {
+    private const int BatchSize = 20;
+
     protected virtual string ProductSnapshotResponseGroup { get; } =
         (ItemResponseGroup.ItemInfo |
         ItemResponseGroup.ItemAssets |
@@ -24,18 +24,15 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
     private readonly IItemService _itemService;
     private readonly IOrderProductSnapshotService _snapshotService;
     private readonly IOrderProductSnapshotSearchService _snapshotSearchService;
-    private readonly ISettingsManager _settingsManager;
 
     public VirtoCatalogSnapshotProvider(
         IItemService itemService,
         IOrderProductSnapshotService snapshotService,
-        IOrderProductSnapshotSearchService snapshotSearchService,
-        ISettingsManager settingsManager)
+        IOrderProductSnapshotSearchService snapshotSearchService)
     {
         _itemService = itemService;
         _snapshotService = snapshotService;
         _snapshotSearchService = snapshotSearchService;
-        _settingsManager = settingsManager;
     }
 
     public async Task SaveOrderProductSnapshotsAsync(CustomerOrder order)
@@ -64,10 +61,9 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
             return;
         }
 
-        var batchSize = await _settingsManager.GetValueAsync<int>(ModuleConstants.Settings.General.ProductSnapshotBatchSize);
         var allSnapshots = new List<OrderProductSnapshot>();
 
-        foreach (var batchIds in newProductIds.Paginate(batchSize))
+        foreach (var batchIds in newProductIds.Paginate(BatchSize))
         {
             var products = await _itemService.GetNoCloneAsync(batchIds, ProductSnapshotResponseGroup);
 
