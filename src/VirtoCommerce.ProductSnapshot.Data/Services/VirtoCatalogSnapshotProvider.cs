@@ -25,7 +25,8 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
     private readonly IOrderProductSnapshotService _snapshotService;
     private readonly IOrderProductSnapshotSearchService _snapshotSearchService;
 
-    public VirtoCatalogSnapshotProvider(IItemService itemService,
+    public VirtoCatalogSnapshotProvider(
+        IItemService itemService,
         IOrderProductSnapshotService snapshotService,
         IOrderProductSnapshotSearchService snapshotSearchService)
     {
@@ -60,19 +61,35 @@ public class VirtoCatalogSnapshotProvider : ICatalogProductSnapshotProvider
             return;
         }
 
+        var allSnapshots = new List<OrderProductSnapshot>();
+
         foreach (var batchIds in newProductIds.Paginate(BatchSize))
         {
             var products = await _itemService.GetNoCloneAsync(batchIds, ProductSnapshotResponseGroup);
 
-            if (products.IsNullOrEmpty())
+            if (!products.IsNullOrEmpty())
             {
-                continue;
+                allSnapshots.AddRange(CreateOrderProductSnapshots(order, products));
             }
-
-            var snapshots = CreateOrderProductSnapshots(order, products);
-
-            await _snapshotService.SaveChangesAsync(snapshots);
         }
+
+        if (allSnapshots.Count > 0)
+        {
+            await _snapshotService.SaveChangesAsync(allSnapshots);
+        }
+    }
+
+    public async Task<bool> HasOrderProductSnapshotsAsync(string orderId)
+    {
+        var searchCriteria = new OrderProductSnapshotSearchCriteria
+        {
+            OrderIds = [orderId],
+            Take = 1,
+        };
+
+        var result = await _snapshotSearchService.SearchAsync(searchCriteria);
+
+        return result.TotalCount > 0;
     }
 
     public async Task<IList<CatalogProduct>> GetOrderProductSnapshotsAsync(string orderId)

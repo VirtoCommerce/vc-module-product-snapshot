@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.1016.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Hangfire" Version="3.1016.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.ProductSnapshot.Core\VirtoCommerce.ProductSnapshot.Core.csproj" />

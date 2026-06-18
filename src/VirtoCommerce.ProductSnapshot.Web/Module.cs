@@ -15,6 +15,7 @@ using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
 using VirtoCommerce.ProductSnapshot.Core;
 using VirtoCommerce.ProductSnapshot.Core.Services;
+using VirtoCommerce.ProductSnapshot.Data.BackgroundJobs;
 using VirtoCommerce.ProductSnapshot.Data.Handlers;
 using VirtoCommerce.ProductSnapshot.Data.MySql;
 using VirtoCommerce.ProductSnapshot.Data.PostgreSql;
@@ -75,6 +76,7 @@ public class Module : IModule, IHasConfiguration
 
         serviceCollection.AddTransient<ICatalogProductSnapshotProvider, VirtoCatalogSnapshotProvider>();
         serviceCollection.AddTransient<CreateOrderProductSnapshotEventHandler>();
+        serviceCollection.AddTransient<SaveOrderProductSnapshotsJob>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
