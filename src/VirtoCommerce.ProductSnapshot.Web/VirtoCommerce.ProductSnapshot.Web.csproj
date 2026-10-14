@@ -12,6 +12,13 @@
     <Content Remove="dist\**" />
     <EmbeddedResource Remove="dist\**" />
     <None Remove="dist\**" />
+    <!-- Admin Shell plugin: Vue sources in vue/, built into plugins/admin-shell/ -->
+    <Compile Remove="vue\**" />
+    <Content Remove="vue\**" />
+    <EmbeddedResource Remove="vue\**" />
+    <None Remove="vue\**" />
+    <Content Remove="plugins\**" />
+    <None Remove="plugins\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Localizations\**">
@@ -26,4 +33,10 @@
     <ProjectReference Include="..\VirtoCommerce.ProductSnapshot.Data.SqlServer\VirtoCommerce.ProductSnapshot.Data.SqlServer.csproj" />
     <ProjectReference Include="..\VirtoCommerce.ProductSnapshot.ExperienceApi\VirtoCommerce.ProductSnapshot.ExperienceApi.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <AdminShellPlugin Include="plugins\**" />
+  </ItemGroup>
+  <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(AdminShellPlugin)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+  </Target>
 </Project>

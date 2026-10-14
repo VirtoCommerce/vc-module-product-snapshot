@@ -1,0 +1,4 @@
+{
+  // Product snapshot (Admin Shell Module Federation remote): a widget on the Orders line item blade, no menu item
+  "remote": { "name": "productsnapshot_admin", "exposed": "./Module" }
+}
