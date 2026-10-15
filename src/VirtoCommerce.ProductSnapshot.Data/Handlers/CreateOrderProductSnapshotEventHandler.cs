@@ -1,9 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Hangfire;
 using VirtoCommerce.OrdersModule.Core.Events;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Events;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.ProductSnapshot.Core;
 using VirtoCommerce.ProductSnapshot.Data.BackgroundJobs;
@@ -11,8 +11,7 @@ using VirtoCommerce.ProductSnapshot.Data.BackgroundJobs;
 namespace VirtoCommerce.ProductSnapshot.Data.Handlers;
 
 public class CreateOrderProductSnapshotEventHandler(
-    ISettingsManager settingsManager,
-    IBackgroundJobClient backgroundJobClient) : IEventHandler<OrderChangedEvent>
+    ISettingsManager settingsManager) : IEventHandler<OrderChangedEvent>
 {
     public async Task Handle(OrderChangedEvent message)
     {
@@ -27,9 +26,16 @@ public class CreateOrderProductSnapshotEventHandler(
             .Distinct()
             .ToArray();
 
+        var options = new EnqueueOptions { MaxRetryAttempts = SaveOrderProductSnapshotsJobHandler.MaxRetryAttempts };
+
         foreach (var orderId in orderIds)
         {
-            backgroundJobClient.Enqueue<SaveOrderProductSnapshotsJob>(job => job.ExecuteAsync(orderId));
+            var payload = AbstractTypeFactory<SaveOrderProductSnapshotsJobPayload>.TryCreateInstance();
+            payload.OrderId = orderId;
+
+            // The static facade, not an injected IBackgroundJob: RegisterEventHandler resolves this handler once from
+            // the root provider and holds it for the process lifetime, so it must not capture a Scoped dependency.
+            await BackgroundJob.Enqueue<SaveOrderProductSnapshotsJobHandler>(payload, options);
         }
     }
 }
