@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "product-snapshot:access": "فتح قائمة لقطات المنتجات",
+    "product-snapshot:create": "إنشاء البيانات المتعلقة بلقطات المنتجات",
+    "product-snapshot:read": "عرض البيانات المتعلقة بلقطات المنتجات",
+    "product-snapshot:update": "تحديث البيانات المتعلقة بلقطات المنتجات",
+    "product-snapshot:delete": "حذف البيانات المتعلقة بلقطات المنتجات"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "تفعيل لقطات المنتجات",
+        "description": "تفعيل الإنشاء التلقائي للقطة المنتج عند تقديم طلب جديد أو تعطيله"
+      }
+    }
+  }
+}
