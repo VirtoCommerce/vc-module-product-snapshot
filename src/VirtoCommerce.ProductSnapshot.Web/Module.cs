@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VirtoCommerce.OrdersModule.Core.Events;
 using VirtoCommerce.Platform.Core.Events;
+using VirtoCommerce.Platform.Core.Jobs;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
@@ -77,6 +78,9 @@ public class Module : IModule, IHasConfiguration
         serviceCollection.AddTransient<ICatalogProductSnapshotProvider, VirtoCatalogSnapshotProvider>();
         serviceCollection.AddTransient<CreateOrderProductSnapshotEventHandler>();
         serviceCollection.AddTransient<SaveOrderProductSnapshotsJob>();
+        // Not triggerable by name: a caller-supplied order id would record today's catalog data as the
+        // snapshot of an order placed earlier.
+        serviceCollection.AddBackgroundJob<SaveOrderProductSnapshotsJobHandler, SaveOrderProductSnapshotsJobPayload>(triggerable: false);
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
