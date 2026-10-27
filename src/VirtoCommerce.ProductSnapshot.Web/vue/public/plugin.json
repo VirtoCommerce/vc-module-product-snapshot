@@ -1,0 +1,3 @@
+{
+  "remote": { "name": "productsnapshot_admin", "exposed": "./Module" }
+}

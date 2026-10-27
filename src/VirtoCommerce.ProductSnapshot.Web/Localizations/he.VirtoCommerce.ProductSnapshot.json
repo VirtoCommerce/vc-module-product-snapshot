@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "product-snapshot:access": "פתיחת תפריט תמונות המצב של מוצרים",
+    "product-snapshot:create": "יצירת נתונים הקשורים לתמונות מצב של מוצרים",
+    "product-snapshot:read": "צפייה בנתונים הקשורים לתמונות מצב של מוצרים",
+    "product-snapshot:update": "עדכון נתונים הקשורים לתמונות מצב של מוצרים",
+    "product-snapshot:delete": "מחיקת נתונים הקשורים לתמונות מצב של מוצרים"
+  },
+  "settings": {
+    "ProductSnapshot": {
+      "Enabled": {
+        "title": "תמונת מצב של מוצר מופעלת",
+        "description": "הפעלה או השבתה של יצירה אוטומטית של תמונת מצב של המוצר בעת ביצוע הזמנה חדשה"
+      }
+    }
+  }
+}
